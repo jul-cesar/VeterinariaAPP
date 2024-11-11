@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VeterinariaAPP.Views.Perfil"
+             Title="Perfil">
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Encabezado -->
+            <Label Text="Perfil del Usuario"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <!-- Nombre del Usuario -->
+            <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
+                <StackLayout>
+                    <Label Text="Nombre:" FontAttributes="Bold" FontSize="Medium"/>
+                    <Label Text="{Binding NombreUser}" FontSize="Medium" TextColor="Black"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Email del Usuario -->
+            <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
+                <StackLayout>
+                    <Label Text="Correo Electrónico:" FontAttributes="Bold" FontSize="Medium"/>
+                    <Label Text="{Binding EmailUser}" FontSize="Medium" TextColor="Black"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- ID del Usuario -->
+            <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
+                <StackLayout>
+                    <Label Text="ID de Usuario:" FontAttributes="Bold" FontSize="Medium"/>
+                    <Label Text="{Binding IdUser}" FontSize="Medium" TextColor="Black"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Botón para Cerrar Sesión -->
+            <Button Text="Cerrar Sesión"
+                    Command="{Binding LogoutCommand}"
+                    BackgroundColor="Red"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HorizontalOptions="Center"
+                    WidthRequest="200" />
+
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

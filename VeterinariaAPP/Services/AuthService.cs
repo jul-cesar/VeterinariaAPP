@@ -17,7 +17,7 @@ namespace VeterinariaAPP.Services
 
         public async Task<LoginResponse> LoginUserService(Logeo data)
         {
-            var apiUrl = "https://7f98-2800-e2-407f-fd96-1c71-d6c3-b573-baef.ngrok-free.app/api/auth/login";
+            var apiUrl = "https://9d61-2800-e2-407f-fd96-8131-67c-b752-9406.ngrok-free.app/api/auth/login";
             var jsonContent = JsonConvert.SerializeObject(data);
             Console.WriteLine($"JSON Content: {jsonContent}");
 
@@ -47,7 +47,7 @@ namespace VeterinariaAPP.Services
 
         public async Task<RegistroResponse> RegisterUserService(Registro data)
         {
-            var apiUrl = "https://7f98-2800-e2-407f-fd96-1c71-d6c3-b573-baef.ngrok-free.app/api/auth/register";
+            var apiUrl = "https://9d61-2800-e2-407f-fd96-8131-67c-b752-9406.ngrok-free.app/api/auth/register";
            
                 var jsonContent = JsonConvert.SerializeObject(data);
                 Console.WriteLine($"JSON Content: {jsonContent}");

@@ -2,13 +2,44 @@
 <Shell
     x:Class="VeterinariaAPP.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:local="clr-namespace:VeterinariaAPP.Views"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:VeterinariaAPP"
     Shell.FlyoutBehavior="Disabled"
     Title="VeterinariaAPP">
 
+    <TabBar>
+
+        <Tab Title="Servicios">
+            <ShellContent
+          Title="Servicios"
+          ContentTemplate="{DataTemplate local:ServiciosView}"
+          Route="servicios" />
+        </Tab>
+
+     
+
+        <Tab Title="Notificaciones">
+            <ShellContent
+                Title="Notificaciones"
+                ContentTemplate="{DataTemplate local:Notificaciones}"
+                Route="notificaciones" />
+        </Tab>
+
+
+        <Tab Title="Perfil">
+            <ShellContent
+                Title="Perfil"
+                ContentTemplate="{DataTemplate local:Perfil}"
+                Route="perfil" />
+        </Tab>
+
+      
+    </TabBar>
+
+    <!-- Ruta fuera del TabBar para Login -->
     <ShellContent
-        Title="Home"
-        Route="MainPage" />
+        Title="Login"
+        ContentTemplate="{DataTemplate local:Login}"
+        Route="login" />
 
 </Shell>

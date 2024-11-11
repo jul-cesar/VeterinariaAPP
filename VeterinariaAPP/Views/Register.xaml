@@ -79,7 +79,7 @@
                        TextColor="{StaticResource Primary}"
                        FontAttributes="Bold">
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer />
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                     </Label.GestureRecognizers>
                 </Label>
             </HorizontalStackLayout>

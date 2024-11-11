@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VeterinariaAPP.Views.Login"
              Title="Login"
-             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
              Padding="20">
 
     <ScrollView>
@@ -45,7 +44,7 @@
                    TextColor="Red"
                    FontAttributes="Italic"
                    HorizontalOptions="Center"
-                   IsVisible="{Binding ErrorMessage, Converter={StaticResource NullToBooleanConverter}}"
+                   IsVisible="{Binding ErrorMessage}"
                    Margin="0,5"/>
 
             <Button Command="{Binding LoginUserCommand}"

@@ -11,7 +11,7 @@ namespace VeterinariaAPP
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(serviceProvider.GetRequiredService<Register>());
+            MainPage = new AppShell();
         }
     }
 }

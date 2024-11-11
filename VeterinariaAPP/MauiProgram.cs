@@ -19,8 +19,18 @@ namespace VeterinariaAPP
                 });
             builder.Services.AddSingleton<AuthService>();
             builder.Services.AddSingleton<AuthViewModel>();
+            builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<ServicesViewModel>();
+
+            builder.Services.AddSingleton<ServicesService>();
+
             builder.Services.AddSingleton<Register>();
             builder.Services.AddSingleton<Login>();
+            builder.Services.AddSingleton<MainView>();
+            builder.Services.AddSingleton<Perfil>();
+
+            builder.Services.AddSingleton<ServiciosView>();
+
 
 
 

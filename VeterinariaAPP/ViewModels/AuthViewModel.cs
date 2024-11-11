@@ -9,12 +9,10 @@ namespace VeterinariaAPP.ViewModels
     public partial class AuthViewModel : ObservableObject
     {
         private readonly AuthService authService;
-        private readonly IServiceProvider serviceProvider;
-        public AuthViewModel(AuthService auth, IServiceProvider provider)
+        public AuthViewModel(AuthService auth)
         {
             authService = auth;
 
-            serviceProvider = provider;
         }
 
         [ObservableProperty]
@@ -36,7 +34,6 @@ namespace VeterinariaAPP.ViewModels
         [RelayCommand]
         public async Task LoginUser()
         {
-            // Validación de campos vacíos
             if (string.IsNullOrWhiteSpace(PasswordEntry) || string.IsNullOrWhiteSpace(EmailEntry))
             {
                 Console.WriteLine("Please fill in all fields.");
@@ -45,7 +42,7 @@ namespace VeterinariaAPP.ViewModels
                 return;
             }
 
-            IsLoading = true; // Corregido: Añadido punto y coma
+            IsLoading = true;
 
             try
             {
@@ -55,16 +52,23 @@ namespace VeterinariaAPP.ViewModels
                     Password = PasswordEntry,
                 };
 
-                // Intento de inicio de sesión llamando al servicio de autenticación
                 var response = await authService.LoginUserService(loginData);
 
-                if (response != null && !string.IsNullOrEmpty(response.Token))
+                if (response != null && !string.IsNullOrEmpty(response.Token) && !string.IsNullOrEmpty(response.Data.Id_Usuario) && !string.IsNullOrEmpty(response.Data.Nombre) && !string.IsNullOrEmpty(response.Data.Email))
                 {
                     Console.WriteLine("Login successful");
-                    ErrorMessage = string.Empty; // Limpiar mensaje de error en caso de éxito
+                    await SecureStorage.SetAsync("token", response.Token);
+                    await SecureStorage.SetAsync("id", response.Data.Id_Usuario);
+                    await SecureStorage.SetAsync("email", response.Data.Email);
+                    await SecureStorage.SetAsync("nombre", response.Data.Nombre);
 
-                    // Aquí puedes navegar a otra página o limpiar los campos
-                    // Ejemplo: NavigationService.NavigateTo("HomePage");
+
+                    ErrorMessage = string.Empty;
+                    EmailEntry = string.Empty;
+                    PasswordEntry = string.Empty;
+
+                    await Shell.Current.GoToAsync("//main", true);
+
                 }
                 else
                 {
@@ -75,11 +79,11 @@ namespace VeterinariaAPP.ViewModels
             catch (Exception ex)
             {
                 Console.WriteLine($"Error during login: {ex.Message}");
-                ErrorMessage = ex.Message; // Mostrar mensaje de error en la UI
+                ErrorMessage = ex.Message; 
             }
             finally
             {
-                IsLoading = false; // Detener el indicador de carga
+                IsLoading = false; 
             }
         }
 
@@ -114,9 +118,9 @@ namespace VeterinariaAPP.ViewModels
                 if (response != null)
                 {
                     Console.WriteLine("Registration successful");
-                    passwordEntry = String.Empty;
+                    PasswordEntry = String.Empty;
                     EmailEntry = String.Empty;
-                    await Application.Current.MainPage.Navigation.PushAsync(serviceProvider.GetRequiredService<Login>());
+                    await Shell.Current.GoToAsync($"{nameof(MainView)}", true);
 
                 }
                 else
@@ -129,7 +133,7 @@ namespace VeterinariaAPP.ViewModels
             catch (Exception ex)
             {
                 Console.WriteLine($"Error during registration: {ex.Message}");
-                ErrorMessage = ex.Message; // Mostrar mensaje de error en la UI
+                ErrorMessage = ex.Message; 
 
             }
             finally

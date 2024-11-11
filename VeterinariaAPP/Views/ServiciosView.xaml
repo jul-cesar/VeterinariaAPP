@@ -1,0 +1,50 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VeterinariaAPP.Views.ServiciosView"
+             Title="Servicios">
+
+    <ContentPage.Content>
+        <Grid Padding="10">
+
+            <!-- ActivityIndicator para mostrar un loading spinner -->
+            <ActivityIndicator 
+                IsRunning="{Binding IsLoading}" 
+                IsVisible="{Binding IsLoading}" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Center" 
+                Color="Gray" />
+
+            <!-- CollectionView para mostrar la lista de servicios -->
+            <CollectionView ItemsSource="{Binding Servicios}">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="5" Padding="10" BorderColor="LightGray" CornerRadius="10">
+                            <StackLayout>
+
+                                <Image Source="{Binding Img}" HeightRequest="150" Aspect="AspectFill" />
+
+                                <Label Text="{Binding Nombre}" 
+                                       FontAttributes="Bold" 
+                                       FontSize="Medium" 
+                                       TextColor="Black" />
+
+                                <Label Text="{Binding Descripcion}" 
+                                       FontSize="Small" 
+                                       TextColor="Gray" 
+                                       Margin="0,5,0,0" />
+
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Label Text="{Binding Precio, StringFormat='Precio: ${0:F2}'}" FontSize="Small" />
+                                    <Label Text="{Binding Duracion, StringFormat='Duración: {0} min'}" FontSize="Small" />
+                                </StackLayout>
+
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
