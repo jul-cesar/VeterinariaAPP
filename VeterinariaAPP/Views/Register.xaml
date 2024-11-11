@@ -2,26 +2,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VeterinariaAPP.Views.Register"
-             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}">
+             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
+             Padding="20">
 
     <ScrollView>
-        <Grid RowSpacing="10" 
-              Padding="20"
-              VerticalOptions="Center">
+        <VerticalStackLayout Spacing="15" VerticalOptions="CenterAndExpand">
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <!-- Row for ActivityIndicator -->
-            </Grid.RowDefinitions>
-
-            <!-- Header -->
-            <VerticalStackLayout Grid.Row="0" Spacing="5">
+            <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
                 <Label Text="Create Account"
                        FontSize="32"
                        FontAttributes="Bold"
@@ -31,9 +18,7 @@
                        HorizontalOptions="Center"/>
             </VerticalStackLayout>
 
-            <!-- Name Entry -->
-            <Frame Grid.Row="1" 
-                   Padding="15,5" 
+            <Frame Padding="15,5" 
                    BorderColor="LightGray"
                    CornerRadius="8"
                    HasShadow="False">
@@ -43,9 +28,7 @@
                        HeightRequest="40"/>
             </Frame>
 
-            <!-- Email Entry -->
-            <Frame Grid.Row="2" 
-                   Padding="15,5" 
+            <Frame Padding="15,5" 
                    BorderColor="LightGray"
                    CornerRadius="8"
                    HasShadow="False">
@@ -56,9 +39,7 @@
                        HeightRequest="40"/>
             </Frame>
 
-            <!-- Password Entry -->
-            <Frame Grid.Row="3" 
-                   Padding="15,5" 
+            <Frame Padding="15,5" 
                    BorderColor="LightGray"
                    CornerRadius="8"
                    HasShadow="False">
@@ -69,21 +50,30 @@
                        HeightRequest="40"/>
             </Frame>
 
-            <!-- Register Button -->
-            <Button Grid.Row="4"
-                    Command="{Binding RegisterUser}"
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   FontAttributes="Italic"
+                   HorizontalOptions="Center"
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource NullToBooleanConverter}}"
+                   Margin="0,5"/>
+
+            <Button Command="{Binding RegisterUserCommand}"
                     Text="Register"
                     FontAttributes="Bold"
                     BackgroundColor="{StaticResource Primary}"
                     TextColor="White"
                     CornerRadius="8"
-                    HeightRequest="50"
-                    Margin="0,10"/>
+                    HeightRequest="50"/>
 
-            <!-- Login Link -->
-            <HorizontalStackLayout Grid.Row="5" 
-                                   HorizontalOptions="Center"
-                                   Spacing="5">
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}"
+                               Color="{StaticResource Primary}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               WidthRequest="50"
+                               HeightRequest="50"/>
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
                 <Label Text="Already have an account?"/>
                 <Label Text="Login"
                        TextColor="{StaticResource Primary}"
@@ -94,16 +84,6 @@
                 </Label>
             </HorizontalStackLayout>
 
-            <!-- Activity Indicator (Loader) -->
-            <ActivityIndicator Grid.Row="6"
-                               IsRunning="{Binding IsLoading}"
-                               IsVisible="{Binding IsLoading}"
-                               Color="{StaticResource Primary}"
-                               VerticalOptions="Center"
-                               HorizontalOptions="Center"
-                               WidthRequest="50"
-                               HeightRequest="50"/>
-
-        </Grid>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

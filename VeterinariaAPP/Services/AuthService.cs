@@ -1,8 +1,6 @@
-﻿using System;
-using System.Net.Http;
+﻿
 using System.Net.Http.Json;
 using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json; 
 using VeterinariaAPP.Models.Auth;
 
@@ -17,37 +15,79 @@ namespace VeterinariaAPP.Services
             Client = new HttpClient();
         }
 
+        public async Task<LoginResponse> LoginUserService(Logeo data)
+        {
+            var apiUrl = "https://7f98-2800-e2-407f-fd96-1c71-d6c3-b573-baef.ngrok-free.app/api/auth/login";
+            var jsonContent = JsonConvert.SerializeObject(data);
+            Console.WriteLine($"JSON Content: {jsonContent}");
+
+            var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            var response = await Client.PostAsync(apiUrl, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadFromJsonAsync<LoginResponse>();
+                return responseData;
+            }
+            else
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Error Content: {errorContent}");
+
+                var errorResponse = JsonConvert.DeserializeObject<ErrorLoginResponse>(errorContent);
+                if (errorResponse != null && !string.IsNullOrEmpty(errorResponse.Message))
+                {
+                    throw new Exception(errorResponse.Message);
+                }
+
+                throw new Exception("An unknown error occurred during login.");
+            }
+        }
+
+
         public async Task<RegistroResponse> RegisterUserService(Registro data)
         {
-            var apiUrl = "https://4785-2800-e2-407f-fd96-1c71-d6c3-b573-baef.ngrok-free.app/api/auth/register";
-            try
-            {
-                // Serialize the data to JSON
+            var apiUrl = "https://7f98-2800-e2-407f-fd96-1c71-d6c3-b573-baef.ngrok-free.app/api/auth/register";
+           
                 var jsonContent = JsonConvert.SerializeObject(data);
+                Console.WriteLine($"JSON Content: {jsonContent}");
+
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-                // Send POST request
                 var response = await Client.PostAsync(apiUrl, content);
 
-                // Check if the response is successful
                 if (response.IsSuccessStatusCode)
                 {
-                    // Deserialize the response to RegistroResponse
                     var responseData = await response.Content.ReadFromJsonAsync<RegistroResponse>();
                     return responseData;
                 }
                 else
                 {
-                    // Handle error response or throw an exception as needed
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine($"Error Content: {errorContent}");
+
+                    var errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(errorContent);
+                if (errorResponse != null && errorResponse.Messages != null)
+                {
+                    var combinedErrors = string.Join(", ", errorResponse.Messages.Select(e => $"{e.Message}"));
+                    Console.WriteLine($"Combined Errors: {combinedErrors}");
+
+                    throw new Exception(combinedErrors);
+                }
+
+                var singleErrorResponse = JsonConvert.DeserializeObject<SingleErrorResponse>(errorContent);
+                        if (singleErrorResponse != null)
+                        {
+                            Console.WriteLine($"Message: {singleErrorResponse.Message}");
+                        throw new Exception(singleErrorResponse.Message);
+
+                    
+                }
+
                     throw new Exception("Registration failed with status code: " + response.StatusCode);
                 }
-            }
-            catch (Exception ex)
-            {
-                // Log the error or handle it as needed
-                Console.WriteLine($"Error during registration: {ex.Message}");
-                return null;
-            }
+            
         }
+
     }
 }

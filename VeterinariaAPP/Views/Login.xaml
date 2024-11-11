@@ -2,11 +2,79 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VeterinariaAPP.Views.Login"
-             Title="Login">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Login"
+             BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
+             Padding="20">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" VerticalOptions="CenterAndExpand">
+
+            <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                <Label Text="Welcome Back!"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"/>
+                <Label Text="Please sign in to continue"
+                       TextColor="Gray"
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+            <Frame Padding="15,5" 
+                   BorderColor="LightGray"
+                   CornerRadius="8"
+                   HasShadow="False">
+                <Entry Placeholder="Email"
+                       Keyboard="Email"
+                       Text="{Binding EmailEntry}"
+                       PlaceholderColor="Gray"
+                       HeightRequest="40"/>
+            </Frame>
+
+            <Frame Padding="15,5" 
+                   BorderColor="LightGray"
+                   CornerRadius="8"
+                   HasShadow="False">
+                <Entry Placeholder="Password"
+                       IsPassword="True"
+                       Text="{Binding PasswordEntry}"
+                       PlaceholderColor="Gray"
+                       HeightRequest="40"/>
+            </Frame>
+
+            <Label Text="{Binding ErrorMessage}"
+                   TextColor="Red"
+                   FontAttributes="Italic"
+                   HorizontalOptions="Center"
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource NullToBooleanConverter}}"
+                   Margin="0,5"/>
+
+            <Button Command="{Binding LoginUserCommand}"
+                    Text="Login"
+                    FontAttributes="Bold"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    CornerRadius="8"
+                    HeightRequest="50"/>
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}"
+                               Color="{StaticResource Primary}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               WidthRequest="50"
+                               HeightRequest="50"/>
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                <Label Text="Don't have an account?"/>
+                <Label Text="Register"
+                       TextColor="{StaticResource Primary}"
+                       FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateToRegisterCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
