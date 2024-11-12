@@ -9,6 +9,14 @@
 
     <TabBar>
 
+        <Tab Title="Main">
+            <ShellContent
+   Title="Servicios"
+   ContentTemplate="{DataTemplate local:MainView}"
+   Route="main" />
+        </Tab>
+
+
         <Tab Title="Servicios">
             <ShellContent
           Title="Servicios"
@@ -41,5 +49,9 @@
         Title="Login"
         ContentTemplate="{DataTemplate local:Login}"
         Route="login" />
-
+    <ShellContent
+     Title="Register"
+     ContentTemplate="{DataTemplate local:Register}"
+     Route="register" />
+ 
 </Shell>

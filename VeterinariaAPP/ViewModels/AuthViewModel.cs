@@ -88,9 +88,6 @@ namespace VeterinariaAPP.ViewModels
         }
 
 
-
-
-
         [RelayCommand]
         public async Task RegisterUser()
         {
@@ -120,7 +117,7 @@ namespace VeterinariaAPP.ViewModels
                     Console.WriteLine("Registration successful");
                     PasswordEntry = String.Empty;
                     EmailEntry = String.Empty;
-                    await Shell.Current.GoToAsync($"{nameof(MainView)}", true);
+                    await Shell.Current.GoToAsync($"//login", true);
 
                 }
                 else
@@ -140,6 +137,13 @@ namespace VeterinariaAPP.ViewModels
             {
                 IsLoading = false; 
             }
+        }
+
+        [RelayCommand]
+
+        public async Task NavigateToRegister()
+        {
+            await Shell.Current.GoToAsync("//register");
         }
 
 

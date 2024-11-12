@@ -15,11 +15,11 @@
                 Color="Gray" />
 
             <!-- CollectionView para mostrar la lista de servicios -->
-            <CollectionView ItemsSource="{Binding Servicios}">
+            <CollectionView ItemsSource="{Binding Servicios}" SelectionChanged="CollectionView_SelectionChanged" SelectionMode="Single">
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Margin="5" Padding="10" BorderColor="LightGray" CornerRadius="10">
+                          
                             <StackLayout>
 
                                 <Image Source="{Binding Img}" HeightRequest="150" Aspect="AspectFill" />
@@ -40,7 +40,6 @@
                                 </StackLayout>
 
                             </StackLayout>
-                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

@@ -1,3 +1,4 @@
+using VeterinariaAPP.Models;
 using VeterinariaAPP.ViewModels;
 
 namespace VeterinariaAPP.Views;
@@ -10,4 +11,12 @@ public partial class ServiciosView : ContentPage
 		BindingContext = viewModel;	
 		viewModel.GetServiciosCommand.Execute(null);
 	}
+
+    private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+		if(e.CurrentSelection.FirstOrDefault() is Servicio servicio)
+		{
+			await Shell.Current.GoToAsync($"details?idServicio={servicio.IdServicio}");
+		}
+    }
 }
