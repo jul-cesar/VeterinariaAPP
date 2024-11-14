@@ -13,15 +13,13 @@
     </ContentPage.Resources>
 
     <Grid RowDefinitions="Auto,*" Padding="10">
-        <!-- Indicador de carga -->
         <ActivityIndicator Grid.RowSpan="2"
                            IsRunning="{Binding IsLoading}" 
                            IsVisible="{Binding IsLoading}" 
                            HorizontalOptions="Center" 
                            VerticalOptions="Center"
-                           Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+                            />
 
-        <!-- Colección de Servicios -->
         <CollectionView Grid.Row="1" 
                         ItemsSource="{Binding Servicios}" 
                         x:Name="collectionViewServicios"
@@ -35,7 +33,6 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Style="{StaticResource CardStyle}">
-                        <!-- Imagen del servicio -->
                         <Image Source="{Binding Img}"
                                HeightRequest="100"
                                WidthRequest="100"
@@ -45,7 +42,6 @@
                                Margin="0,0,10,0"
                                Clip="10"/>
 
-                        <!-- Detalles del servicio -->
                         <StackLayout VerticalOptions="Center" Spacing="4">
                             <Label Text="{Binding Nombre}" 
                                    FontSize="16"
@@ -57,18 +53,17 @@
                                    MaxLines="2"
                                    LineBreakMode="TailTruncation"/>
 
-                            <!-- Precio y duración -->
                             <StackLayout Orientation="Horizontal" Spacing="10">
                                 <Label Text="{Binding Precio, StringFormat='${0:F2}'}" 
                                        FontSize="14"
-                                       TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}"
-                                       BackgroundColor="{AppThemeBinding Light=#f0f0f0, Dark=#333333}"
+                                      
+                                      
                                        Padding="8,4"
                                        />
                                 <Label Text="{Binding Duracion, StringFormat='{0} min'}" 
                                        FontSize="14"
-                                       TextColor="{AppThemeBinding Light=#666666, Dark=#cccccc}"
-                                       BackgroundColor="{AppThemeBinding Light=#f0f0f0, Dark=#333333}"
+                                     
+                                      
                                        Padding="8,4"
                                      />
                             </StackLayout>

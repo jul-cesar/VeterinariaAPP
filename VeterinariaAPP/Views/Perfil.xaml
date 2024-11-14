@@ -40,6 +40,14 @@
                     HorizontalOptions="Center"
                     WidthRequest="200" />
 
+            <Button Text="Agregar mascota"
+          Command="{Binding AgregarMascotaPopUpCommand}"
+          BackgroundColor="Red"
+          TextColor="White"
+          CornerRadius="10"
+          HorizontalOptions="Center"
+          WidthRequest="200" />
+
         </VerticalStackLayout>
     </ContentPage.Content>
 </ContentPage>

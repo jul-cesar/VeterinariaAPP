@@ -31,7 +31,7 @@ namespace VeterinariaAPP.Models;
     [JsonProperty("notas_medicas")]
 
     public string NotasMedicas { get; set; }
-    [JsonProperty("fechas_registro")]
+    [JsonProperty("fecha_registro")]
 
     public DateTime FechaRegistro { get; set; }
 

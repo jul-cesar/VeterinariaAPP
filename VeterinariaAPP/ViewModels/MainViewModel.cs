@@ -2,19 +2,24 @@
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Mopups.Services;
 using VeterinariaAPP.Models;
 using VeterinariaAPP.Services;
+using VeterinariaAPP.Views;
 
 namespace VeterinariaAPP.ViewModels;
 
 public partial class MainViewModel : ObservableObject
 {
     private readonly ServicesService _servicesService;
+    private readonly IServiceProvider provider;
 
-    public MainViewModel(ServicesService servicesService)
+
+    public MainViewModel(ServicesService servicesService, IServiceProvider provider)
     {
         _servicesService = servicesService;
         LoadUserDataCommand.Execute(null);
+        this.provider = provider;
     }
 
     [ObservableProperty]
@@ -58,6 +63,12 @@ public partial class MainViewModel : ObservableObject
         SecureStorage.Remove("email");
 
         await Shell.Current.GoToAsync("//login");
+    }
+    [RelayCommand]
+    public async Task AgregarMascotaPopUp()
+    {
+
+        await MopupService.Instance.PushAsync(provider.GetRequiredService<AgregarMascota>());
     }
 
     [RelayCommand]

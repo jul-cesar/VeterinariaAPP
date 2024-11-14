@@ -190,9 +190,20 @@ public class ServicesService
         }
     }
 
-    public async Task<CitaResponse> ApartarCitaService (CrearCita data)
+    public async Task<CitaResponse> ApartarCitaService(CrearCita data)
     {
         var apiUrl = $"{UrlApi}/api/citas";
+
+        // Recupera el token de SecureStorage
+        var token = await SecureStorage.GetAsync("token");
+
+        if (string.IsNullOrEmpty(token))
+        {
+            throw new Exception("No se encontró el token de autenticación.");
+        }
+
+        // Agrega el token en el encabezado de autorización
+        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var jsonContent = JsonConvert.SerializeObject(data);
         Console.WriteLine($"JSON Content: {jsonContent}");
@@ -225,14 +236,12 @@ public class ServicesService
             {
                 Console.WriteLine($"Message: {singleErrorResponse.Message}");
                 throw new Exception(singleErrorResponse.Message);
-
-
             }
 
-            throw new Exception("Registration failed with status code: " + response.StatusCode);
+            throw new Exception("Error al apartar la cita con código de estado: " + response.StatusCode);
         }
-
     }
+
 
     public async Task<List<Notificacion>> GetNotificacionesUser(string idUser)
     {

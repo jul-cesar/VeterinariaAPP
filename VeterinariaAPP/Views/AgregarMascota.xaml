@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mopup:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mopup="clr-namespace:Mopups.Pages;assembly=Mopups"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+
+             x:Class="VeterinariaAPP.Views.AgregarMascota"
+             Title="AgregarMascota">
+    <ScrollView HorizontalOptions="Center" VerticalOptions="Center" Padding="20">
+        <Border WidthRequest="340" 
+             HeightRequest="560"
+             BackgroundColor="White"
+             HorizontalOptions="Center"
+             StrokeThickness="2"
+             Stroke="#E0E0E0"
+            >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20"/>
+            </Border.StrokeShape>
+            <VerticalStackLayout Spacing="15" Padding="20">
+
+                <material:TextField Title="Nombre" Text="{Binding NombreMascota}"/>
+                <material:TextField Title="Edad" Text="{Binding EdadMascota}" Keyboard="Number"/>
+                <material:EditorField Title="Raza" Text="{Binding RazaMascota}" />
+                <material:EditorField Title="Raza" Text="{Binding EspecieMascota}" />
+
+                <material:EditorField Title="Notas medicas" Text="{Binding NotasMedicas}" />
+
+
+                <Button Text="Agregar mascota"
+                     Command="{Binding AgregarMascotaCommand}"
+                     FontSize="16"
+                     TextColor="White"
+                     BackgroundColor="#3E7CFF"
+                     CornerRadius="10"
+                     Padding="10"
+                     Margin="0,20,0,0"
+                     HorizontalOptions="Fill"/>
+
+            </VerticalStackLayout>
+        </Border>
+    </ScrollView>
+</mopup:PopupPage>
