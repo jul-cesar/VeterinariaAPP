@@ -3,21 +3,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VeterinariaAPP.Views.DetailsServicioView"
              Title="Detalles del Servicio">
-    <VerticalStackLayout Spacing="20" Margin="20">
-        <Image Source="{Binding ServicioActual.Img}" WidthRequest="150" HeightRequest="150" HorizontalOptions="Center" />
-        <Label Text="{Binding ServicioActual.Nombre}" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Center" />
-        <Label Text="{Binding ServicioActual.Descripcion}" FontSize="Body" />
-        <Grid ColumnSpacing="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Label Text="Precio:" Grid.Column="0" FontAttributes="Bold" />
-            <Label Text="{Binding ServicioActual.Precio, StringFormat='{0:C}'}" Grid.Column="1" HorizontalOptions="End" />
-            <Label Text="Duración:" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" />
-            <Label Text="{Binding ServicioActual.Duracion, StringFormat='{0} minutos'}" Grid.Row="1" Grid.Column="1" HorizontalOptions="End" />
-        </Grid>
-        <Label Text="{Binding ServicioActual.Recomendaciones}" FontSize="Body" />
-        <Button Text="Agendar Cita"  Command="{Binding OpenApartarCitaCommand}" HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.Resources>
+        <Style x:Key="LabelTitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="#333" />
+        </Style>
+        <Style x:Key="LabelSubtitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="TextColor" Value="#555" />
+        </Style>
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#5A67D8" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="Padding" Value="10,10" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Margin="20">
+            <Frame HasShadow="True" CornerRadius="20" Padding="10" BackgroundColor="#F9F9F9" HorizontalOptions="Center">
+                <Image Source="{Binding ServicioActual.Img}" WidthRequest="150" HeightRequest="150" HorizontalOptions="Center" Aspect="AspectFill"/>
+            </Frame>
+
+            <Label Text="{Binding ServicioActual.Nombre}" Style="{StaticResource LabelTitleStyle}" HorizontalOptions="Center" />
+
+            <Label Text="{Binding ServicioActual.Descripcion}" Style="{StaticResource LabelSubtitleStyle}" HorizontalOptions="Center" />
+
+            <Frame HasShadow="True" CornerRadius="15" Padding="15" BackgroundColor="#EFEFEF">
+                <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center">
+                        <HorizontalStackLayout>
+                            <Label Text="Precio:" FontAttributes="Bold" TextColor="#333" />
+                            <Label Text="{Binding ServicioActual.Precio, StringFormat='{0:C}'}"  HorizontalOptions="End" TextColor="#FF5733" />
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout>
+                            <Label Text="Duración:" FontAttributes="Bold" TextColor="#333" />
+                            <Label Text="{Binding ServicioActual.Duracion, StringFormat='{0} minutos'}"  HorizontalOptions="End" TextColor="#5A67D8" />
+                        </HorizontalStackLayout>
+                  
+                </FlexLayout>
+            </Frame>
+
+            <Frame HasShadow="True" CornerRadius="15" Padding="15" BackgroundColor="#FFFFFF">
+                <Label Text="{Binding ServicioActual.Recomendaciones , StringFormat='Recomendaciones generales: {0}'}" Style="{StaticResource LabelSubtitleStyle}" FontSize="15" />
+            </Frame>
+
+            <Button Text="Agendar Cita" 
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Command="{Binding OpenApartarCitaCommand}"
+                    HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

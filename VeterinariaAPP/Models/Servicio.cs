@@ -19,7 +19,7 @@ namespace VeterinariaAPP.Models
         public string Descripcion { get; set; }
 
         [JsonProperty("precio")]
-        public decimal Precio { get; set; } // Asegúrate de que "precio" sea decimal para valores monetarios
+        public decimal Precio { get; set; } 
 
         [JsonProperty("duracion")]
         public int Duracion { get; set; }

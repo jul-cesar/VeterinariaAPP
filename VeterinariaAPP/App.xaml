@@ -6,11 +6,14 @@
              x:Class="VeterinariaAPP.App">
     <Application.Resources>
         <ResourceDictionary>
+            <local:DateFormatConverter x:Key="DateFormatConverter"/>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary x:Name="appColors" Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary x:Name="appStyles" Source="Resources/Styles/Styles.xaml" />
 
                 <material:StyleResource ColorsOverride="{x:Reference appColors}" BasedOn="{x:Reference appStyles}" />
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -2,11 +2,11 @@
 
 public class CrearCita
 {
-    public string IdUsuario { get; set; }
-    public string IdMascota { get; set; }   
-    public string IdServicio { get; set; }
-    public string IdDisponibilidad { get; set; }  
-    public string Descripcion {  get; set; }
+    public string id_usuario { get; set; }
+    public string id_mascota { get; set; }   
+    public string id_servicio { get; set; }
+    public string id_disponibilidad { get; set; }  
+    public string descripcion {  get; set; }
     
 
 

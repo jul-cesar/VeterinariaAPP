@@ -3,10 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VeterinariaAPP.Views.Notificaciones"
              Title="Notificaciones">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <ContentPage.Resources>
+        <Style x:Key="NotificationTitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="#333" />
+        </Style>
+        <Style x:Key="NotificationDescriptionStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="#666" />
+        </Style>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Padding="10">
+        <ActivityIndicator IsRunning="{Binding IsLoading}" 
+                           IsVisible="{Binding IsLoading}" 
+                           Color="#5A67D8"
+                           HorizontalOptions="Center" 
+                           VerticalOptions="CenterAndExpand" />
+
+        <CollectionView ItemsSource="{Binding Notis}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame HasShadow="True" CornerRadius="10" Margin="5" Padding="10" BackgroundColor="#FFFFFF">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding mensaje}" Style="{StaticResource NotificationTitleStyle}" />
+
+                            <Label Text="{Binding tipo}" Style="{StaticResource NotificationDescriptionStyle}" />
+
+                            <Label Text="{Binding fecha_envio, StringFormat='{0:dd MMM yyyy}'}" FontSize="12" TextColor="#999" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="20" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Text="No hay notificaciones" TextColor="#999" FontSize="16" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>

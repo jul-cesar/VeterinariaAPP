@@ -1,24 +1,72 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
-             
-             x:Class="VeterinariaAPP.Views.ApartarCita"
-             Title="ApartarCita">
- 
-            <VerticalStackLayout Spacing="3" VerticalOptions="Center" Padding="20">
-                <Label Text="{Binding ServicioActual.Nombre, StringFormat='Apartar cita para {0}'}"/>
+<mopup:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+                 xmlns:mopup="clr-namespace:Mopups.Pages;assembly=Mopups"
+                 x:Class="VeterinariaAPP.Views.ApartarCita"
+                 Title="Apartar Cita">
 
+    <ScrollView HorizontalOptions="Center" VerticalOptions="Center" Padding="20">
+        <Border WidthRequest="340" 
+                HeightRequest="560"
+                BackgroundColor="White"
+                HorizontalOptions="Center"
+                StrokeThickness="2"
+                Stroke="#E0E0E0"
+               >
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20"/>
+            </Border.StrokeShape>
+            <VerticalStackLayout Spacing="15" Padding="20">
+
+                <Label Text="{Binding ServicioActual.Nombre, StringFormat='Apartar cita para {0}'}"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#3E4A59"
+                       HorizontalOptions="Center"/>
+
+                <Label Text="{Binding ErrorMessage}"
+                       FontSize="14"
+                       TextColor="Red"
+                       HorizontalOptions="Center"
+                       IsVisible="{Binding ErrorMessage, Converter={StaticResource NullToBoolConverter}}"/>
 
                 <material:PickerField 
                     SelectedItem="{Binding MascotaSeleccionada, Mode=TwoWay}"
                     Title="Seleccione una mascota"
                     ItemsSource="{Binding Mascotas}"
-                
-                     />
+                    TitleColor="#757575"
+                  
+                    WidthRequest="300"/>
 
+                <material:PickerField 
+                    SelectedItem="{Binding FechaDisponibleSeleccionada, Mode=TwoWay}"
+                    Title="Seleccione una fecha"
+                    ItemsSource="{Binding Dispos}"
+                    ItemDisplayBinding="{Binding fecha, Converter={StaticResource DateFormatConverter}}"
+                    TitleColor="#757575"
+                    
+                    WidthRequest="300"/>
+
+                <material:EditorField 
+                    Title="Descripción"
+                    Text="{Binding Descripcion}"
+                    
+                    WidthRequest="300"
+                    TitleColor="#757575"
+                  />
+
+                <Button Text="Apartar cita"
+                        Command="{Binding ApartarCitaCommand}"
+                        FontSize="16"
+                        TextColor="White"
+                        BackgroundColor="#3E7CFF"
+                        CornerRadius="10"
+                        Padding="10"
+                        Margin="0,20,0,0"
+                        HorizontalOptions="Fill"/>
 
             </VerticalStackLayout>
-       
-       
-</ContentPage>
+        </Border>
+    </ScrollView>
+</mopup:PopupPage>

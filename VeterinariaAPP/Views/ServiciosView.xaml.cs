@@ -16,7 +16,8 @@ public partial class ServiciosView : ContentPage
     {
 		if(e.CurrentSelection.FirstOrDefault() is Servicio servicio)
 		{
-			await Shell.Current.GoToAsync($"details?idServicio={servicio.IdServicio}");
+			collectionViewServicios.SelectedItem = null;
+            await Shell.Current.GoToAsync($"details?idServicio={servicio.IdServicio}");
 		}
     }
 }

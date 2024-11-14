@@ -1,47 +1,81 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VeterinariaAPP.Views.ServiciosView"
-             Title="Servicios">
+             Title="Servicios"
+             BackgroundColor="#f0f0f3">
+    <ContentPage.Resources>
+        <Style x:Key="CardStyle" TargetType="Grid">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="Shadow" Value="8"/>
+        </Style>
+    </ContentPage.Resources>
 
-    <ContentPage.Content>
-        <Grid Padding="10">
+    <Grid RowDefinitions="Auto,*" Padding="10">
+        <!-- Indicador de carga -->
+        <ActivityIndicator Grid.RowSpan="2"
+                           IsRunning="{Binding IsLoading}" 
+                           IsVisible="{Binding IsLoading}" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"
+                           Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
 
-            <ActivityIndicator 
-                IsRunning="{Binding IsLoading}" 
-                IsVisible="{Binding IsLoading}" 
-                HorizontalOptions="Center" 
-                VerticalOptions="Center" 
-                Color="Gray" />
+        <!-- Colección de Servicios -->
+        <CollectionView Grid.Row="1" 
+                        ItemsSource="{Binding Servicios}" 
+                        x:Name="collectionViewServicios"
+                        SelectionChanged="CollectionView_SelectionChanged"
+                        SelectionMode="Single">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="8"/>
+            </CollectionView.ItemsLayout>
+            
 
-            <CollectionView ItemsSource="{Binding Servicios}" SelectionChanged="CollectionView_SelectionChanged" SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Style="{StaticResource CardStyle}">
+                        <!-- Imagen del servicio -->
+                        <Image Source="{Binding Img}"
+                               HeightRequest="100"
+                               WidthRequest="100"
+                               Aspect="AspectFill"
+                               HorizontalOptions="Start"
+                               VerticalOptions="Center"
+                               Margin="0,0,10,0"
+                               Clip="10"/>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                          
-                            <StackLayout>
+                        <!-- Detalles del servicio -->
+                        <StackLayout VerticalOptions="Center" Spacing="4">
+                            <Label Text="{Binding Nombre}" 
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="#333333"/>
+                            <Label Text="{Binding Descripcion}" 
+                                   FontSize="14"
+                                   TextColor="{AppThemeBinding Light=#666666, Dark=#cccccc}"
+                                   MaxLines="2"
+                                   LineBreakMode="TailTruncation"/>
 
-                                <Image Source="{Binding Img}" HeightRequest="150" Aspect="AspectFill" />
-
-                                <Label Text="{Binding Nombre}" 
-                                       FontAttributes="Bold" 
-                                       FontSize="Medium" 
-                                       TextColor="Black" />
-
-                                <Label Text="{Binding Descripcion}" 
-                                       FontSize="Small" 
-                                       TextColor="Gray" 
-                                       Margin="0,5,0,0" />
-
-                                <StackLayout Orientation="Horizontal" Spacing="10">
-                                    <Label Text="{Binding Precio, StringFormat='Precio: ${0:F2}'}" FontSize="Small" />
-                                    <Label Text="{Binding Duracion, StringFormat='Duración: {0} min'}" FontSize="Small" />
-                                </StackLayout>
-
+                            <!-- Precio y duración -->
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="{Binding Precio, StringFormat='${0:F2}'}" 
+                                       FontSize="14"
+                                       TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}"
+                                       BackgroundColor="{AppThemeBinding Light=#f0f0f0, Dark=#333333}"
+                                       Padding="8,4"
+                                       />
+                                <Label Text="{Binding Duracion, StringFormat='{0} min'}" 
+                                       FontSize="14"
+                                       TextColor="{AppThemeBinding Light=#666666, Dark=#cccccc}"
+                                       BackgroundColor="{AppThemeBinding Light=#f0f0f0, Dark=#333333}"
+                                       Padding="8,4"
+                                     />
                             </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-        </Grid>
-    </ContentPage.Content>
+                        </StackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

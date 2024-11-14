@@ -31,6 +31,7 @@ namespace VeterinariaAPP
             builder.Services.AddSingleton<MainViewModel>();       // Singleton for main app state
             builder.Services.AddSingleton<ServicesViewModel>();   // Transient if `ServicesViewModel` is specific to a view
             builder.Services.AddSingleton<ApartarCita>();  // Transient if used with specific parameters each time
+            builder.Services.AddSingleton<Notificaciones>();  // Transient if used with specific parameters each time
 
             // Views
             builder.Services.AddSingleton<Register>();

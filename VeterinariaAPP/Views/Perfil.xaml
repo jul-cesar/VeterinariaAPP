@@ -6,13 +6,11 @@
     <ContentPage.Content>
         <VerticalStackLayout Padding="20" Spacing="15">
 
-            <!-- Encabezado -->
             <Label Text="Perfil del Usuario"
                    FontSize="Large"
                    FontAttributes="Bold"
                    HorizontalOptions="Center" />
 
-            <!-- Nombre del Usuario -->
             <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
                 <StackLayout>
                     <Label Text="Nombre:" FontAttributes="Bold" FontSize="Medium"/>
@@ -20,7 +18,6 @@
                 </StackLayout>
             </Frame>
 
-            <!-- Email del Usuario -->
             <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
                 <StackLayout>
                     <Label Text="Correo Electrónico:" FontAttributes="Bold" FontSize="Medium"/>
@@ -28,7 +25,6 @@
                 </StackLayout>
             </Frame>
 
-            <!-- ID del Usuario -->
             <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
                 <StackLayout>
                     <Label Text="ID de Usuario:" FontAttributes="Bold" FontSize="Medium"/>
@@ -36,7 +32,6 @@
                 </StackLayout>
             </Frame>
 
-            <!-- Botón para Cerrar Sesión -->
             <Button Text="Cerrar Sesión"
                     Command="{Binding LogoutCommand}"
                     BackgroundColor="Red"
