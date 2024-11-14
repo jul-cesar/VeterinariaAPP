@@ -2,10 +2,8 @@
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Extensions.DependencyInjection;
 using Mopups.Services;
 using VeterinariaAPP.Models;
-using VeterinariaAPP.Models.Auth;
 using VeterinariaAPP.Models.Auth.Citas;
 using VeterinariaAPP.Services;
 using VeterinariaAPP.Views;

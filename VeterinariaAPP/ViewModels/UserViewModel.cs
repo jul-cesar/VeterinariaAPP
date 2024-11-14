@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mopups.Services;
 using VeterinariaAPP.Models;
@@ -14,6 +16,8 @@ namespace VeterinariaAPP.ViewModels
         {
             this.userService = _userService;
         }
+        [ObservableProperty]
+        private ObservableCollection<Mascota> mascotas = new();
 
         [ObservableProperty]
         private string razaMascota;
@@ -128,6 +132,33 @@ namespace VeterinariaAPP.ViewModels
                 Console.WriteLine($"Error durante agregando la mascota: {ex.Message}");
                 ErrorMessage = $"Error: {ex.Message}";
                 await Shell.Current.DisplayAlert("Error", ErrorMessage, "Ok");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+        [RelayCommand]
+        public async Task GetMascotasUserAsync()
+        {
+            try
+            {
+                isLoading = true;
+                var id = await SecureStorage.GetAsync("id");
+
+                if (string.IsNullOrWhiteSpace(id))
+                {
+                    await Shell.Current.DisplayAlert("Error", "No user ID found.", "OK");
+                    return;
+                }
+
+                var mascotasResponse = await userService.GetMascotasUserService(id);
+                Mascotas = new ObservableCollection<Mascota>(mascotasResponse ?? new List<Mascota>());
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Error", $"Error retrieving pets: {ex.Message}", "OK");
             }
             finally
             {

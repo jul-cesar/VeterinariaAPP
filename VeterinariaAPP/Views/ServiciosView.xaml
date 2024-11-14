@@ -11,7 +11,7 @@
             <Setter Property="Shadow" Value="8"/>
         </Style>
     </ContentPage.Resources>
-
+    <ScrollView>
     <Grid RowDefinitions="Auto,*" Padding="10">
         <ActivityIndicator Grid.RowSpan="2"
                            IsRunning="{Binding IsLoading}" 
@@ -73,4 +73,5 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </Grid>
+    </ScrollView>
 </ContentPage>

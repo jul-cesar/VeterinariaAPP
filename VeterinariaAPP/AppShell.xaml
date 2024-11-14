@@ -5,46 +5,62 @@
     xmlns:local="clr-namespace:VeterinariaAPP.Views"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarTitleColor="Black"
+    Shell.TabBarForegroundColor="Black" 
+    Shell.NavBarHasShadow="True"
+    
     Title="VeterinariaAPP">
 
     <TabBar>
 
-        <Tab Title="Main">
+        <Tab Title="Home" Icon="house.png">
+            
             <ShellContent
-   Title="Servicios"
+   Title="Home"
+                
    ContentTemplate="{DataTemplate local:MainView}"
    Route="main" />
         </Tab>
 
 
-        <Tab Title="Servicios">
+        <Tab Title="Servicios"  Icon="services.png">
             <ShellContent
           Title="Servicios"
+               
           ContentTemplate="{DataTemplate local:ServiciosView}"
           Route="servicios" />
         </Tab>
 
-     
 
-        <Tab Title="Notificaciones">
+
+        <Tab Title="Notificaciones"  Icon="bell.png">
             <ShellContent
                 Title="Notificaciones"
+               
                 ContentTemplate="{DataTemplate local:Notificaciones}"
                 Route="notificaciones" />
         </Tab>
+        <Tab Title="Mis mascotas"  Icon="cat.png">
+            <ShellContent
+         Title="Macotas"
+        
+         ContentTemplate="{DataTemplate local:MascotasView}"
+         Route="mascotas" />
+        </Tab>
 
 
-        <Tab Title="Perfil">
+        <Tab Title="Perfil"  Icon="user.png">
             <ShellContent
                 Title="Perfil"
+               
                 ContentTemplate="{DataTemplate local:Perfil}"
                 Route="perfil" />
         </Tab>
 
-      
+       
+
     </TabBar>
 
-    <!-- Ruta fuera del TabBar para Login -->
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate local:Login}"
