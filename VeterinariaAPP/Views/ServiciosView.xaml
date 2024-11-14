@@ -6,7 +6,6 @@
     <ContentPage.Content>
         <Grid Padding="10">
 
-            <!-- ActivityIndicator para mostrar un loading spinner -->
             <ActivityIndicator 
                 IsRunning="{Binding IsLoading}" 
                 IsVisible="{Binding IsLoading}" 
@@ -14,7 +13,6 @@
                 VerticalOptions="Center" 
                 Color="Gray" />
 
-            <!-- CollectionView para mostrar la lista de servicios -->
             <CollectionView ItemsSource="{Binding Servicios}" SelectionChanged="CollectionView_SelectionChanged" SelectionMode="Single">
 
                 <CollectionView.ItemTemplate>

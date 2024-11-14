@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             
+             x:Class="VeterinariaAPP.Views.ApartarCita"
+             Title="ApartarCita">
+ 
+            <VerticalStackLayout Spacing="3" VerticalOptions="Center" Padding="20">
+                <Label Text="{Binding ServicioActual.Nombre, StringFormat='Apartar cita para {0}'}"/>
+
+
+                <material:PickerField 
+                    SelectedItem="{Binding MascotaSeleccionada, Mode=TwoWay}"
+                    Title="Seleccione una mascota"
+                    ItemsSource="{Binding Mascotas}"
+                
+                     />
+
+
+            </VerticalStackLayout>
+       
+       
+</ContentPage>

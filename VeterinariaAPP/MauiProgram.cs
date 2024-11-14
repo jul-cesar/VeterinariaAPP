@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using Mopups.Hosting;
+using UraniumUI;
 using VeterinariaAPP.Services;
 using VeterinariaAPP.ViewModels;
 using VeterinariaAPP.Views;
@@ -12,6 +14,9 @@ namespace VeterinariaAPP
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .ConfigureMopups()
+                .UseUraniumUI()
+                .UseUraniumUIMaterial()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -24,7 +29,8 @@ namespace VeterinariaAPP
             // View Models
             builder.Services.AddSingleton<AuthViewModel>();       // Singleton for auth-related state
             builder.Services.AddSingleton<MainViewModel>();       // Singleton for main app state
-            builder.Services.AddTransient<ServicesViewModel>();   // Transient if `ServicesViewModel` is specific to a view
+            builder.Services.AddSingleton<ServicesViewModel>();   // Transient if `ServicesViewModel` is specific to a view
+            builder.Services.AddSingleton<ApartarCita>();  // Transient if used with specific parameters each time
 
             // Views
             builder.Services.AddSingleton<Register>();

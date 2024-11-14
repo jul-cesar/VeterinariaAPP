@@ -62,10 +62,15 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.82" />
+		<PackageReference Include="Mopups" Version="1.3.2" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="UraniumUI.Material" Version="2.10.2" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\ApartarCita.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\DetailsServicioView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

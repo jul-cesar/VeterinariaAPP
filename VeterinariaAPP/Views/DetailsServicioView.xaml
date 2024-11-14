@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-          
              x:Class="VeterinariaAPP.Views.DetailsServicioView"
-             Title="DetailsServicioView">
-
-    <VerticalStackLayout>
-        <Label 
-            
-            Text="{Binding IdServicio}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Label Text="{Binding ServicioActual.Nombre}"/>
-
-        <Label Text="{Binding ServicioActual.Descripcion}"/>
-
+             Title="Detalles del Servicio">
+    <VerticalStackLayout Spacing="20" Margin="20">
+        <Image Source="{Binding ServicioActual.Img}" WidthRequest="150" HeightRequest="150" HorizontalOptions="Center" />
+        <Label Text="{Binding ServicioActual.Nombre}" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Center" />
+        <Label Text="{Binding ServicioActual.Descripcion}" FontSize="Body" />
+        <Grid ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Text="Precio:" Grid.Column="0" FontAttributes="Bold" />
+            <Label Text="{Binding ServicioActual.Precio, StringFormat='{0:C}'}" Grid.Column="1" HorizontalOptions="End" />
+            <Label Text="Duración:" Grid.Row="1" Grid.Column="0" FontAttributes="Bold" />
+            <Label Text="{Binding ServicioActual.Duracion, StringFormat='{0} minutos'}" Grid.Row="1" Grid.Column="1" HorizontalOptions="End" />
+        </Grid>
+        <Label Text="{Binding ServicioActual.Recomendaciones}" FontSize="Body" />
+        <Button Text="Agendar Cita"  Command="{Binding OpenApartarCitaCommand}" HorizontalOptions="Center" />
     </VerticalStackLayout>
-
 </ContentPage>
