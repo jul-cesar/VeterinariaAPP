@@ -29,12 +29,12 @@ namespace VeterinariaAPP
 
 
             // View Models
-            builder.Services.AddSingleton<AuthViewModel>();       // Singleton for auth-related state
-            builder.Services.AddSingleton<MainViewModel>();       // Singleton for main app state
-            builder.Services.AddSingleton<ServicesViewModel>();   // Transient if `ServicesViewModel` is specific to a view
-            builder.Services.AddSingleton<ApartarCita>();  // Transient if used with specific parameters each time
-            builder.Services.AddSingleton<Notificaciones>();  // Transient if used with specific parameters each time
-            builder.Services.AddSingleton<AgregarMascota>();  // Transient if used with specific parameters each time
+            builder.Services.AddSingleton<AuthViewModel>();      
+            builder.Services.AddSingleton<MainViewModel>();       
+            builder.Services.AddSingleton<ServicesViewModel>();   
+            builder.Services.AddSingleton<ApartarCita>();  
+            builder.Services.AddSingleton<Notificaciones>();  
+            builder.Services.AddSingleton<AgregarMascota>();  
 
             // Views
             builder.Services.AddSingleton<Register>();
@@ -42,11 +42,13 @@ namespace VeterinariaAPP
             builder.Services.AddSingleton<MainView>();
             builder.Services.AddSingleton<Perfil>();
             builder.Services.AddSingleton<MascotasView>();
+            builder.Services.AddSingleton<MascotaDetails>();
+
 
             builder.Services.AddSingleton<ServiciosView>();
             builder.Services.AddSingleton<UserViewModel>();
 
-            builder.Services.AddTransient<DetailsServicioView>();  // Transient if used with specific parameters each time
+            builder.Services.AddSingleton<DetailsServicioView>();  
 
 
 

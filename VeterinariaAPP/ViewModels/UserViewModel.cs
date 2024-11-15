@@ -5,17 +5,30 @@ using CommunityToolkit.Mvvm.Input;
 using Mopups.Services;
 using VeterinariaAPP.Models;
 using VeterinariaAPP.Services;
+using VeterinariaAPP.Views;
 
 namespace VeterinariaAPP.ViewModels
 {
+    [QueryProperty(nameof(IdMascota), "idMascota")]
+
     public partial class UserViewModel : ObservableObject
     {
         private readonly UserService userService;
+        private readonly IServiceProvider provider;
 
-        public UserViewModel(UserService _userService)
+        public UserViewModel(UserService _userService, IServiceProvider provider)
         {
             this.userService = _userService;
+            this.provider = provider;
+
         }
+        [ObservableProperty]
+
+        private Mascota mascotaActual;
+
+        [ObservableProperty]
+        private string idMascota;
+
         [ObservableProperty]
         private ObservableCollection<Mascota> mascotas = new();
 
@@ -109,10 +122,74 @@ namespace VeterinariaAPP.ViewModels
                 if (response != null)
                 {
                     Console.WriteLine("Mascota agregada con éxito.");
-                    await Shell.Current.GoToAsync("///servicios");
+                  
                     await MopupService.Instance.PopAsync();
 
                     await Shell.Current.DisplayAlert("Éxito", "Mascota agregada correctamente", "Ok");
+
+                    EdadMascota = 0;
+                    EspecieMascota = string.Empty;
+                    NombreMascota = string.Empty;
+                    NotasMedicas = string.Empty;
+                    RazaMascota = string.Empty;
+                }
+                else
+                {
+                    Console.WriteLine("Fallo al agregar la mascota.");
+                    ErrorMessage = "Fallo al agregar la mascota.";
+                    await Shell.Current.DisplayAlert("Error", ErrorMessage, "Ok");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error durante agregando la mascota: {ex.Message}");
+                ErrorMessage = $"Error: {ex.Message}";
+                await Shell.Current.DisplayAlert("Error", ErrorMessage, "Ok");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+
+        [RelayCommand]
+        public async Task ActualizarMascota()
+        {
+           
+            IsLoading = true;
+
+            try
+            {
+                var idUser = await SecureStorage.GetAsync("id");
+
+                if (string.IsNullOrWhiteSpace(idUser))
+                {
+                    ErrorMessage = "No se encontró el ID del usuario.";
+                    await Shell.Current.DisplayAlert("Error", ErrorMessage, "Ok");
+                    IsLoading = false;
+                    return;
+                }
+
+                var mascotaData = new CrearMascota
+                {
+                    Edad = MascotaActual.Edad,
+                    Especie = MascotaActual.Especie,
+                    IdUsuario = idUser,
+                    Nombre = MascotaActual.Nombre,
+                    NotasMedicas = MascotaActual.NotasMedicas,
+                    Raza = MascotaActual.Raza
+                };
+
+                var response = await userService.ActualizarMascotaService(mascotaData, IdMascota);
+
+                if (response != null)
+                {
+                    Console.WriteLine("Mascota actualizada con éxito.");
+
+                   
+
+                    await Shell.Current.DisplayAlert("Éxito", "Mascota actualizada correctamente", "Ok");
+                    await Shell.Current.GoToAsync("///mascotas");
 
                     EdadMascota = 0;
                     EspecieMascota = string.Empty;
@@ -164,6 +241,37 @@ namespace VeterinariaAPP.ViewModels
             {
                 IsLoading = false;
             }
+        }
+        [RelayCommand]
+        public async Task GetMascota()
+        {
+            try
+            {
+                IsLoading = true;
+
+                var servicioResponse = await userService.GetMascotaService(IdMascota);
+
+                if (servicioResponse != null)
+                {
+                    MascotaActual = servicioResponse;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Error", $"Error trayendo el servicio: {ex.Message}", "OK");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
+
+        [RelayCommand]
+        public async Task AgregarMascotaPopUp()
+        {
+
+            await MopupService.Instance.PushAsync(provider.GetRequiredService<AgregarMascota>());
         }
     }
 }

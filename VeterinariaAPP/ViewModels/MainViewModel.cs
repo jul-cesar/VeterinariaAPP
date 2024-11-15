@@ -12,14 +12,12 @@ namespace VeterinariaAPP.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
     private readonly ServicesService _servicesService;
-    private readonly IServiceProvider provider;
 
 
-    public MainViewModel(ServicesService servicesService, IServiceProvider provider)
+    public MainViewModel(ServicesService servicesService)
     {
         _servicesService = servicesService;
         LoadUserDataCommand.Execute(null);
-        this.provider = provider;
     }
 
     [ObservableProperty]
@@ -64,12 +62,7 @@ public partial class MainViewModel : ObservableObject
 
         await Shell.Current.GoToAsync("//login");
     }
-    [RelayCommand]
-    public async Task AgregarMascotaPopUp()
-    {
-
-        await MopupService.Instance.PushAsync(provider.GetRequiredService<AgregarMascota>());
-    }
+  
 
     [RelayCommand]
     public async Task GetNotificaciones()

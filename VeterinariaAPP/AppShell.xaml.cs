@@ -13,6 +13,9 @@ namespace VeterinariaAPP
             Routing.RegisterRoute("register", typeof(Register));
             Routing.RegisterRoute("main", typeof(MainView));
             Routing.RegisterRoute("apartar", typeof(ApartarCita));
+            Routing.RegisterRoute("mascotas", typeof(MascotasView));
+
+            Routing.RegisterRoute("detailsmascota", typeof(MascotaDetails));
 
 
 

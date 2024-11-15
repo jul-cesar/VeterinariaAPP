@@ -32,7 +32,7 @@
             <Label Text="{Binding ServicioActual.Descripcion}" Style="{StaticResource LabelSubtitleStyle}" HorizontalOptions="Center" />
 
             <Frame HasShadow="True" CornerRadius="15" Padding="15" BackgroundColor="#EFEFEF">
-                <FlexLayout Direction="Column" JustifyContent="Center" AlignItems="Center">
+                <FlexLayout Direction="Column" AlignItems="Center">
                         <HorizontalStackLayout>
                             <Label Text="Precio:" FontAttributes="Bold" TextColor="#333" />
                             <Label Text="{Binding ServicioActual.Precio, StringFormat='{0:C}'}"  HorizontalOptions="End" TextColor="#FF5733" />

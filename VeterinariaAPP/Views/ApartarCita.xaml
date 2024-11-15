@@ -43,6 +43,7 @@
                     SelectedItem="{Binding FechaDisponibleSeleccionada, Mode=TwoWay}"
                     Title="Seleccione una fecha"
                     ItemsSource="{Binding Dispos}"
+                    
                     ItemDisplayBinding="{Binding fecha, Converter={StaticResource DateFormatConverter}}"
                     TitleColor="#757575"
                     

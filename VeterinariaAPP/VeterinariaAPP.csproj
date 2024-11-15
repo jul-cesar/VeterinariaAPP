@@ -61,6 +61,7 @@
 	  <None Remove="Resources\Images\facebook.png" />
 	  <None Remove="Resources\Images\house.png" />
 	  <None Remove="Resources\Images\instagram.png" />
+	  <None Remove="Resources\Images\plus.png" />
 	  <None Remove="Resources\Images\services.png" />
 	  <None Remove="Resources\Images\twitter.png" />
 	  <None Remove="Resources\Images\user.png" />
@@ -91,6 +92,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\MainView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MascotaDetails.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\MascotasView.xaml">

@@ -6,7 +6,7 @@
 
              x:Class="VeterinariaAPP.Views.AgregarMascota"
              Title="AgregarMascota">
-    <ScrollView HorizontalOptions="Center" VerticalOptions="Center" Padding="20">
+    <ScrollView HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Padding="20">
         <Border WidthRequest="340" 
              HeightRequest="560"
              BackgroundColor="White"
@@ -19,10 +19,12 @@
             </Border.StrokeShape>
             <VerticalStackLayout Spacing="15" Padding="20">
 
+                <Label Text="Ingresa los datos de tu nueva mascota!"/>
+
                 <material:TextField Title="Nombre" Text="{Binding NombreMascota}"/>
                 <material:TextField Title="Edad" Text="{Binding EdadMascota}" Keyboard="Number"/>
                 <material:EditorField Title="Raza" Text="{Binding RazaMascota}" />
-                <material:EditorField Title="Raza" Text="{Binding EspecieMascota}" />
+                <material:EditorField Title="Especie" Text="{Binding EspecieMascota}" />
 
                 <material:EditorField Title="Notas medicas" Text="{Binding NotasMedicas}" />
 

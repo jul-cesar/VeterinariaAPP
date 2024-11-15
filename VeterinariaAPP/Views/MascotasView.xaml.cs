@@ -1,3 +1,4 @@
+using VeterinariaAPP.Models;
 using VeterinariaAPP.ViewModels;
 
 namespace VeterinariaAPP.Views;
@@ -18,6 +19,15 @@ public partial class MascotasView : ContentPage
         if (viewModel != null)
         {
             await viewModel.GetMascotasUserCommand.ExecuteAsync(null);
+        }
+    }
+
+    private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.FirstOrDefault() is Mascota mascota)
+        {
+            collectionViewMascotas.SelectedItem = null;
+            await Shell.Current.GoToAsync($"detailsmascota?idMascota={mascota.IdMascota}");
         }
     }
 }
