@@ -58,8 +58,11 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\bell.png" />
 	  <None Remove="Resources\Images\cat.png" />
+	  <None Remove="Resources\Images\facebook.png" />
 	  <None Remove="Resources\Images\house.png" />
+	  <None Remove="Resources\Images\instagram.png" />
 	  <None Remove="Resources\Images\services.png" />
+	  <None Remove="Resources\Images\twitter.png" />
 	  <None Remove="Resources\Images\user.png" />
 	</ItemGroup>
 
