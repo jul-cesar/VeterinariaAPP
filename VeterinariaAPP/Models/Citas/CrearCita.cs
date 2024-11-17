@@ -7,7 +7,9 @@ public class CrearCita
     public string id_servicio { get; set; }
     public string id_disponibilidad { get; set; }  
     public string descripcion {  get; set; }
-    
+    public string metodo_pago { get; set; }
+    public string monto { get; set; }
+
 
 
 }

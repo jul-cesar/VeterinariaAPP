@@ -12,15 +12,13 @@ namespace VeterinariaAPP.Views
             BindingContext = viewModel;
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-            if (BindingContext is ServicesViewModel viewModel)
+            var viewModel = BindingContext as ServicesViewModel;
+            if (viewModel != null)
             {
-                if (!string.IsNullOrEmpty(viewModel.IdServicio))
-                {
-                    viewModel.GetServicioCommand.Execute(null);
-                }
+                await viewModel.GetServicioCommand.ExecuteAsync(null);
             }
         }
 

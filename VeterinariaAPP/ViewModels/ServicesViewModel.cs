@@ -49,8 +49,18 @@ public partial class ServicesViewModel : ObservableObject
 
     [ObservableProperty]
     private bool isLoading;
-
-    
+    [ObservableProperty]
+    private string metodoPagoSeleccionado;
+    [ObservableProperty]
+    private string[] metodosPago = new string[]
+        {
+        "TarjetaDeCredito",
+        "TarjetaDeDebito",
+        "TransferenciaBancaria",
+        "Efectivo"
+        };
+    [ObservableProperty]
+    private string monto;
 
 
 
@@ -201,7 +211,10 @@ public partial class ServicesViewModel : ObservableObject
                 id_disponibilidad = FechaDisponibleSeleccionada.id_disponibilidad,
                 id_mascota = MascotaSeleccionada.IdMascota,
                 id_servicio = servicioActual.IdServicio,
-                id_usuario = idUser
+                id_usuario = idUser,
+                metodo_pago = MetodoPagoSeleccionado,
+                monto = Monto
+                
             };
 
             var response = await serviceServices.ApartarCitaService(citaData);
@@ -214,6 +227,10 @@ public partial class ServicesViewModel : ObservableObject
 
                 await Shell.Current.DisplayAlert("Exito", "Cita apartada correctamente", "Ok");
                 Descripcion = string.Empty;
+                Monto = string.Empty;
+                MascotaSeleccionada = new();
+                MetodoPagoSeleccionado = string.Empty;
+
 
             }
             else

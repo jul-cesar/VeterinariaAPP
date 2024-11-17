@@ -1,72 +1,103 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+
              x:Class="VeterinariaAPP.Views.Login"
              Title="Login"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FFFFFF"
              Padding="20">
 
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="#FFFFFF" StatusBarStyle="DarkContent"/>
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <Style x:Key="InputFrameStyle" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="#FFFFFF"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="BorderColor" Value="#000000"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Margin" Value="0,5"/>
+        </Style>
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#000000"/>
+            <Setter Property="TextColor" Value="#FFFFFF"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="HeightRequest" Value="45"/>
+            <Setter Property="Margin" Value="0,10"/>
+        </Style>
+
+        <Style x:Key="LabelTitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="#000000"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+        </Style>
+
+        <Style x:Key="LabelSubtitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="#757575"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+        </Style>
+    </ContentPage.Resources>
+
     <ScrollView>
-        <VerticalStackLayout Spacing="15" VerticalOptions="CenterAndExpand">
+        <VerticalStackLayout Spacing="20" VerticalOptions="CenterAndExpand">
 
             <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
-                <Label Text="Welcome Back!"
-                       FontSize="32"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Center"/>
-                <Label Text="Please sign in to continue"
-                       TextColor="Gray"
-                       HorizontalOptions="Center"/>
+                <Label Text="¡Bienvenido!"
+                       Style="{StaticResource LabelTitleStyle}"/>
+                <Label Text="Por favor, inicia sesión para continuar"
+                       Style="{StaticResource LabelSubtitleStyle}"/>
             </VerticalStackLayout>
 
-            <Frame Padding="15,5" 
-                   BorderColor="LightGray"
-                   CornerRadius="8"
-                   HasShadow="False">
-                <Entry Placeholder="Email"
+            <Frame Style="{StaticResource InputFrameStyle}">
+                <Entry Placeholder="Correo electrónico"
                        Keyboard="Email"
                        Text="{Binding EmailEntry}"
-                       PlaceholderColor="Gray"
+                       TextColor="#000000"
+                       PlaceholderColor="#757575"
                        HeightRequest="40"/>
             </Frame>
 
-            <Frame Padding="15,5" 
-                   BorderColor="LightGray"
-                   CornerRadius="8"
-                   HasShadow="False">
-                <Entry Placeholder="Password"
+            <Frame Style="{StaticResource InputFrameStyle}">
+                <Entry Placeholder="Contraseña"
                        IsPassword="True"
                        Text="{Binding PasswordEntry}"
-                       PlaceholderColor="Gray"
+                       TextColor="#000000"
+                       PlaceholderColor="#757575"
                        HeightRequest="40"/>
             </Frame>
 
             <Label Text="{Binding ErrorMessage}"
-                   TextColor="Red"
+                   TextColor="#FF0000"
                    FontAttributes="Italic"
                    HorizontalOptions="Center"
                    IsVisible="{Binding ErrorMessage}"
                    Margin="0,5"/>
 
             <Button Command="{Binding LoginUserCommand}"
-                    Text="Login"
-                    FontAttributes="Bold"
-                    BackgroundColor="{StaticResource Primary}"
-                    TextColor="White"
-                    CornerRadius="8"
-                    HeightRequest="50"/>
+                    Text="Iniciar sesión"
+                    Style="{StaticResource ButtonStyle}"/>
 
             <ActivityIndicator IsRunning="{Binding IsLoading}"
                                IsVisible="{Binding IsLoading}"
-                               Color="{StaticResource Primary}"
+                               Color="#000000"
                                VerticalOptions="Center"
                                HorizontalOptions="Center"
-                               WidthRequest="50"
-                               HeightRequest="50"/>
+                               WidthRequest="40"
+                               HeightRequest="40"/>
 
             <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
-                <Label Text="Don't have an account?"/>
-                <Label Text="Register"
-                       TextColor="{StaticResource Primary}"
+                <Label Text="¿No tienes cuenta?"
+                       TextColor="#757575"/>
+                <Label Text="Regístrate"
+                       TextColor="#000000"
                        FontAttributes="Bold">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding NavigateToRegisterCommand}" />

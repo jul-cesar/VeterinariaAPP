@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
 using Mopups.Hosting;
 using UraniumUI;
 using VeterinariaAPP.Services;
@@ -17,6 +18,7 @@ namespace VeterinariaAPP
                 .ConfigureMopups()
                 .UseUraniumUI()
                 .UseUraniumUIMaterial()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -43,6 +45,7 @@ namespace VeterinariaAPP
             builder.Services.AddSingleton<Perfil>();
             builder.Services.AddSingleton<MascotasView>();
             builder.Services.AddSingleton<MascotaDetails>();
+            builder.Services.AddSingleton<HistorialCItasView>();
 
 
             builder.Services.AddSingleton<ServiciosView>();

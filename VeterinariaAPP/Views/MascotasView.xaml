@@ -2,46 +2,80 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VeterinariaAPP.Views.MascotasView"
-             Title="Mascotas">
+             Title="Mascotas"
+             BackgroundColor="#FFFFFF">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Agregar mascota" Command="{Binding AgregarMascotaPopUpCommand}" IconImageSource="plus.png"/>
+        <ToolbarItem Text="Agregar mascota" 
+                     Command="{Binding AgregarMascotaPopUpCommand}" 
+                     IconImageSource="plus.png"/>
     </ContentPage.ToolbarItems>
+
+    <Shell.TitleView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <FlexLayout Grid.Column="0" AlignItems="Center" JustifyContent="SpaceBetween">
+                <Label Text="VeterinariaApp" FontSize="16" FontAttributes="Bold"/>
+
+                <Image 
+                 Source="cat.png" 
+                 HeightRequest="28"/>
+            </FlexLayout>
+        </Grid>
+    </Shell.TitleView>
 
     <ScrollView>
         <VerticalStackLayout Padding="10" Spacing="15">
+            <Label Text="Mis mascotas" FontSize="28" TextColor="#000000" Margin="10" FontAttributes="Bold"/>
+
+            <!-- Indicador de carga -->
             <ActivityIndicator IsRunning="{Binding IsLoading}" 
                                IsVisible="{Binding IsLoading}"
                                VerticalOptions="Center" 
-                               HorizontalOptions="Center" />
+                               HorizontalOptions="Center"
+                               Color="#000000" />
 
+            <!-- Lista de mascotas -->
             <CollectionView ItemsSource="{Binding Mascotas}"
                             SelectionChanged="CollectionView_SelectionChanged"
                             x:Name="collectionViewMascotas"
                             SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Stroke="#e0e0e0" StrokeThickness="1" Padding="10" Margin="0,0,0,15" BackgroundColor="#f9f9f9">
-                            <VerticalStackLayout Spacing="4">
+                        <!-- Tarjeta de mascota -->
+                        <Border Stroke="#000000" 
+                                StrokeThickness="1" 
+                                Padding="10" 
+                                Margin="0,0,0,10" 
+                                BackgroundColor="#FFFFFF" 
+                               >
+                            <VerticalStackLayout Spacing="6">
                                 <Label Text="{Binding Nombre}" 
                                        FontAttributes="Bold" 
-                                       FontSize="Medium" 
-                                       TextColor="#333333" />
+                                       FontSize="16" 
+                                       TextColor="#000000" />
                                 <Label Text="{Binding Especie}" 
-                                       FontSize="Small" 
-                                       TextColor="#666666" />
+                                       FontSize="14" 
+                                       TextColor="#555555" />
                                 <Label Text="{Binding Raza}" 
-                                       FontSize="Small" 
-                                       TextColor="#666666" />
+                                       FontSize="14" 
+                                       TextColor="#555555" />
                                 <Label Text="{Binding Edad, StringFormat='Edad: {0} años'}" 
-                                       FontSize="Small" 
-                                       TextColor="#666666" />
+                                       FontSize="14" 
+                                       TextColor="#555555" />
                                 <Label Text="{Binding NotasMedicas}" 
-                                       FontSize="Small" 
-                                       TextColor="#666666" />
+                                       FontSize="14" 
+                                       TextColor="#555555" />
                                 <Label Text="{Binding FechaRegistro, StringFormat='Fecha de registro: {0:dd/MM/yyyy}'}" 
-                                       FontSize="Small" 
-                                       TextColor="#666666" />
+                                       FontSize="14" 
+                                       TextColor="#555555" />
                             </VerticalStackLayout>
                         </Border>
                     </DataTemplate>

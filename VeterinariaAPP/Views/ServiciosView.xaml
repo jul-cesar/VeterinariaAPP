@@ -1,77 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VeterinariaAPP.Views.ServiciosView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+
              Title="Servicios"
-             BackgroundColor="#f0f0f3">
+             
+             BackgroundColor="#FFFFFF">
+
+    <Shell.TitleView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <FlexLayout Grid.Column="0" AlignItems="Center" JustifyContent="SpaceBetween">
+                <Label Text="VeterinariaApp" FontSize="16" FontAttributes="Bold"/>
+
+                <Image 
+                 Source="cat.png" 
+                 HeightRequest="28"/>
+            </FlexLayout>
+        </Grid>
+    </Shell.TitleView>
+
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="#FFFFFF" StatusBarStyle="DarkContent"/>
+    </ContentPage.Behaviors>
+
     <ContentPage.Resources>
-        <Style x:Key="CardStyle" TargetType="Grid">
-            <Setter Property="BackgroundColor" Value="White"/>
-            <Setter Property="Margin" Value="10,5"/>
-            <Setter Property="Padding" Value="12"/>
-            <Setter Property="Shadow" Value="8"/>
+        <Style x:Key="CardStyle" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="#FFFFFF"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="HasShadow" Value="False"/>
+            <Setter Property="BorderColor" Value="#000000"/>
+            <Setter Property="Margin" Value="12,6"/>
+            <Setter Property="Padding" Value="16"/>
+        </Style>
+
+        <Style x:Key="LabelTitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="#000000"/>
+        </Style>
+
+        <Style x:Key="LabelSubtitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="#555555"/>
+        </Style>
+
+        <Style x:Key="PriceLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="#000000"/>
+        </Style>
+
+        <Style x:Key="DurationLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextColor" Value="#555555"/>
         </Style>
     </ContentPage.Resources>
+
     <ScrollView>
-    <Grid RowDefinitions="Auto,*" Padding="10">
-        <ActivityIndicator Grid.RowSpan="2"
-                           IsRunning="{Binding IsLoading}" 
-                           IsVisible="{Binding IsLoading}" 
-                           HorizontalOptions="Center" 
-                           VerticalOptions="Center"
-                            />
 
-        <CollectionView Grid.Row="1" 
-                        ItemsSource="{Binding Servicios}" 
-                        x:Name="collectionViewServicios"
-                        SelectionChanged="CollectionView_SelectionChanged"
-                        SelectionMode="Single">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="8"/>
-            </CollectionView.ItemsLayout>
-            
+        <Grid RowDefinitions="Auto,*" Padding="16">
+            <Label Text="Servicios" FontSize="28" TextColor="#000000" Margin="10" FontAttributes="Bold"/>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Style="{StaticResource CardStyle}">
-                        <Image Source="{Binding Img}"
-                               HeightRequest="100"
-                               WidthRequest="100"
-                               Aspect="AspectFill"
-                               HorizontalOptions="Start"
-                               VerticalOptions="Center"
-                               Margin="0,0,10,0"
-                               Clip="10"/>
+            <ActivityIndicator Grid.RowSpan="2"
+                               IsRunning="{Binding IsLoading}" 
+                               IsVisible="{Binding IsLoading}" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center"/>
 
-                        <StackLayout VerticalOptions="Center" Spacing="4">
-                            <Label Text="{Binding Nombre}" 
-                                   FontSize="16"
-                                   FontAttributes="Bold"
-                                   TextColor="#333333"/>
-                            <Label Text="{Binding Descripcion}" 
-                                   FontSize="14"
-                                   TextColor="{AppThemeBinding Light=#666666, Dark=#cccccc}"
-                                   MaxLines="2"
-                                   LineBreakMode="TailTruncation"/>
+            <CollectionView Grid.Row="1" 
+                            ItemsSource="{Binding Servicios}" 
+                            x:Name="collectionViewServicios"
+                            SelectionChanged="CollectionView_SelectionChanged"
+                            SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
 
-                            <StackLayout Orientation="Horizontal" Spacing="10">
-                                <Label Text="{Binding Precio, StringFormat='${0:F2}'}" 
-                                       FontSize="14"
-                                      
-                                      
-                                       Padding="8,4"
-                                       />
-                                <Label Text="{Binding Duracion, StringFormat='{0} min'}" 
-                                       FontSize="14"
-                                     
-                                      
-                                       Padding="8,4"
-                                     />
-                            </StackLayout>
-                        </StackLayout>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </Grid>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource CardStyle}" InputTransparent="True">
+                            <HorizontalStackLayout Spacing="12">
+                                <Image Source="{Binding Img}"
+                                       HeightRequest="80"
+                                       WidthRequest="80"
+                                       Aspect="AspectFill"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="Center"
+                                       Clip="10"
+                                       BackgroundColor="#E0E0E0"/>
+
+                                <VerticalStackLayout VerticalOptions="Center" Spacing="6">
+                                    <Label Text="{Binding Nombre}" 
+                                           Style="{StaticResource LabelTitleStyle}"/>
+                                    <Label Text="{Binding Descripcion}" 
+                                           Style="{StaticResource LabelSubtitleStyle}"
+                                           MaxLines="2"
+                                           LineBreakMode="TailTruncation"/>
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Text="{Binding Precio, StringFormat='${0:F2}'}" 
+                                               Style="{StaticResource PriceLabelStyle}"/>
+                                        <Label Text="{Binding Duracion, StringFormat='{0} min'}" 
+                                               Style="{StaticResource DurationLabelStyle}"/>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
     </ScrollView>
 </ContentPage>

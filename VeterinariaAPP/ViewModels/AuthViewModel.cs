@@ -145,7 +145,11 @@ namespace VeterinariaAPP.ViewModels
         {
             await Shell.Current.GoToAsync("//register");
         }
+        [RelayCommand]
 
-
+        public async Task NavigateToLogin()
+        {
+            await Shell.Current.GoToAsync("//login");
+        }
     }
 }

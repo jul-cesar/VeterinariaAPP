@@ -13,7 +13,7 @@
 
     <TabBar>
 
-        <Tab Title="Home" Icon="house.png">
+        <Tab  Icon="house.png">
             
             <ShellContent
    Title="Home"
@@ -23,7 +23,7 @@
         </Tab>
 
 
-        <Tab Title="Servicios"  Icon="services.png">
+        <Tab   Icon="services.png">
             <ShellContent
           Title="Servicios"
                
@@ -33,14 +33,14 @@
 
 
 
-        <Tab Title="Notificaciones"  Icon="bell.png">
+        <Tab   Icon="bell.png">
             <ShellContent
                 Title="Notificaciones"
                
                 ContentTemplate="{DataTemplate local:Notificaciones}"
                 Route="notificaciones" />
         </Tab>
-        <Tab Title="Mis mascotas"  Icon="cat.png">
+        <Tab  Icon="cat.png">
             <ShellContent
          Title="Macotas"
         
@@ -49,7 +49,7 @@
         </Tab>
 
 
-        <Tab Title="Perfil"  Icon="user.png">
+        <Tab  Icon="user.png">
             <ShellContent
                 Title="Perfil"
                

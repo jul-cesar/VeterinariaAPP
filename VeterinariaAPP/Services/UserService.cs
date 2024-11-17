@@ -11,13 +11,14 @@ using System.Net.Http.Json;
 using System.Text;
 using VeterinariaAPP.Models;
 using VeterinariaAPP.Models.Auth;
+using VeterinariaAPP.Models.Auth.Citas;
 
 namespace VeterinariaAPP.Services;
 
     public class UserService
     {
     public HttpClient Client { get; set; }
-    public readonly string UrlApi = "https://0958-2800-e2-407f-fd96-511-e3ce-5fca-8bd4.ngrok-free.app";
+    public readonly string UrlApi = "https://b80a-2800-e2-407f-fd96-1d2d-4faa-9de1-4cac.ngrok-free.app";
 
     public UserService()
     {
@@ -82,7 +83,6 @@ namespace VeterinariaAPP.Services;
     {
         var apiUrl = $"{UrlApi}/api/mascotas/{id}";
 
-        // Recupera el token de SecureStorage
         var token = await SecureStorage.GetAsync("token");
 
         if (string.IsNullOrEmpty(token))
@@ -90,7 +90,6 @@ namespace VeterinariaAPP.Services;
             throw new Exception("No se encontró el token de autenticación.");
         }
 
-        // Agrega el token en el encabezado de autorización
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var jsonContent = JsonConvert.SerializeObject(data);
@@ -133,7 +132,6 @@ namespace VeterinariaAPP.Services;
     {
         var apiUrl = $"{UrlApi}/api/mascotas/{IdUser}";
 
-        // Recupera el token de SecureStorage
         var token = await SecureStorage.GetAsync("token");
 
         if (string.IsNullOrEmpty(token))
@@ -141,17 +139,14 @@ namespace VeterinariaAPP.Services;
             throw new Exception("No se encontró el token de autenticación.");
         }
 
-        // Agrega el token en el encabezado de autorización
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var response = await Client.GetAsync(apiUrl);
 
         if (response.IsSuccessStatusCode)
         {
-            // Leer el contenido de la respuesta como string
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
-            // Deserializar usando Newtonsoft.Json
             var responseData = JsonConvert.DeserializeObject<List<Mascota>>(jsonResponse);
 
             if (responseData != null)
@@ -175,7 +170,6 @@ namespace VeterinariaAPP.Services;
     {
         var apiUrl = $"{UrlApi}/api/mascotas/info/{id}";
 
-        // Recupera el token de SecureStorage
         var token = await SecureStorage.GetAsync("token");
 
         if (string.IsNullOrEmpty(token))
@@ -183,17 +177,14 @@ namespace VeterinariaAPP.Services;
             throw new Exception("No se encontró el token de autenticación.");
         }
 
-        // Agrega el token en el encabezado de autorización
         Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
         var response = await Client.GetAsync(apiUrl);
 
         if (response.IsSuccessStatusCode)
         {
-            // Leer el contenido de la respuesta como string
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
-            // Deserializar usando Newtonsoft.Json
             var responseData = JsonConvert.DeserializeObject<Mascota>(jsonResponse);
 
             if (responseData != null)
@@ -213,5 +204,41 @@ namespace VeterinariaAPP.Services;
         }
     }
 
+    public async Task<List<Cita>> GetCitasService(string id)
+    {
+        var apiUrl = $"{UrlApi}/api/citas/{id}";
 
+        var token = await SecureStorage.GetAsync("token");
+
+        if (string.IsNullOrEmpty(token))
+        {
+            throw new Exception("No se encontró el token de autenticación.");
+        }
+
+        Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        var response = await Client.GetAsync(apiUrl);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            var responseData = JsonConvert.DeserializeObject<List<Cita>>(jsonResponse);
+
+            if (responseData != null)
+            {
+                Console.WriteLine(JsonConvert.SerializeObject(responseData, Formatting.Indented));
+                return responseData;
+            }
+            else
+            {
+                throw new Exception("La respuesta fue exitosa, pero los datos están vacíos.");
+            }
+        }
+        else
+        {
+            var errorContent = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Error al obtener los servicios. Código de estado: {response.StatusCode}. Detalle: {errorContent}");
+        }
+    }
 }

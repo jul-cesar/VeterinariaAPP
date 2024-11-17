@@ -2,57 +2,111 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VeterinariaAPP.Views.DetailsServicioView"
-             Title="Detalles del Servicio">
+             Title="Detalles del Servicio"
+                         
+
+           >
+
     <ContentPage.Resources>
         <Style x:Key="LabelTitleStyle" TargetType="Label">
-            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontSize" Value="22" />
             <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="TextColor" Value="#333" />
+            <Setter Property="TextColor" Value="Black" />
+           
+            <Setter Property="HorizontalOptions" Value="Center" />
         </Style>
         <Style x:Key="LabelSubtitleStyle" TargetType="Label">
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="TextColor" Value="#555" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextColor" Value="DimGray" />
+        
         </Style>
         <Style x:Key="PrimaryButtonStyle" TargetType="Button">
-            <Setter Property="BackgroundColor" Value="#5A67D8" />
-            <Setter Property="TextColor" Value="White" />
+            <Setter Property="BackgroundColor" Value="#000000" />
+        
+            <Setter Property="TextColor" Value="#FFFFFF" />
+          
+            <Setter Property="CornerRadius" Value="25" />
+            <Setter Property="Padding" Value="9" />
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
+        <Style x:Key="CardStyle" TargetType="Frame">
+            <Setter Property="HasShadow" Value="True" />
             <Setter Property="CornerRadius" Value="20" />
-            <Setter Property="Padding" Value="10,10" />
+            <Setter Property="Padding" Value="15" />
+            <Setter Property="BackgroundColor" Value="#FFFFFF" />
+            
         </Style>
     </ContentPage.Resources>
 
     <ScrollView>
-        <VerticalStackLayout Spacing="25" Margin="20">
-            <Frame HasShadow="True" CornerRadius="20" Padding="10" BackgroundColor="#F9F9F9" HorizontalOptions="Center">
-                <Image Source="{Binding ServicioActual.Img}" WidthRequest="150" HeightRequest="150" HorizontalOptions="Center" Aspect="AspectFill"/>
+        <VerticalStackLayout Spacing="20" Margin="20">
+          
+            <Frame Style="{StaticResource CardStyle}" HorizontalOptions="Center" WidthRequest="200" HeightRequest="200">
+                <StackLayout>
+                    <Image Source="{Binding ServicioActual.Img}" 
+                           Aspect="AspectFit"
+                           WidthRequest="180"
+                           HeightRequest="180"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </StackLayout>
             </Frame>
 
-            <Label Text="{Binding ServicioActual.Nombre}" Style="{StaticResource LabelTitleStyle}" HorizontalOptions="Center" />
+      
+            <Label Text="{Binding ServicioActual.Nombre}" 
+                   Style="{StaticResource LabelTitleStyle}" />
 
-            <Label Text="{Binding ServicioActual.Descripcion}" Style="{StaticResource LabelSubtitleStyle}" HorizontalOptions="Center" />
+           
+            <Label Text="{Binding ServicioActual.Descripcion}" 
+                   Style="{StaticResource LabelSubtitleStyle}" 
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,10"/>
 
-            <Frame HasShadow="True" CornerRadius="15" Padding="15" BackgroundColor="#EFEFEF">
-                <FlexLayout Direction="Column" AlignItems="Center">
-                        <HorizontalStackLayout>
-                            <Label Text="Precio:" FontAttributes="Bold" TextColor="#333" />
-                            <Label Text="{Binding ServicioActual.Precio, StringFormat='{0:C}'}"  HorizontalOptions="End" TextColor="#FF5733" />
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
-                            <Label Text="Duración:" FontAttributes="Bold" TextColor="#333" />
-                            <Label Text="{Binding ServicioActual.Duracion, StringFormat='{0} minutos'}"  HorizontalOptions="End" TextColor="#5A67D8" />
-                        </HorizontalStackLayout>
-                  
-                </FlexLayout>
+          
+            <Frame Style="{StaticResource CardStyle}">
+                <VerticalStackLayout Spacing="10">
+                    <HorizontalStackLayout>
+                        <Label Text="Precio:" 
+                               FontAttributes="Bold" 
+                               FontSize="16"
+                               TextColor="#000000" />
+                        
+                        <Label Text="{Binding ServicioActual.Precio, StringFormat='{0:C}'}" 
+                               FontSize="16" 
+                               Margin="10,0,0,0"
+                               TextColor="#FF5252" 
+                              
+                            HorizontalOptions="EndAndExpand" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout>
+                        <Label Text="Duración:" 
+                               FontAttributes="Bold" 
+                               FontSize="16"
+                               TextColor="#000000" />
+                        <Label Text="{Binding ServicioActual.Duracion, StringFormat='{0} minutos'}" 
+                               FontSize="16" 
+                               TextColor="#40C4FF" 
+                              Margin="8,0,0,0"
+
+                            HorizontalOptions="EndAndExpand" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
             </Frame>
 
-            <Frame HasShadow="True" CornerRadius="15" Padding="15" BackgroundColor="#FFFFFF">
-                <Label Text="{Binding ServicioActual.Recomendaciones , StringFormat='Recomendaciones generales: {0}'}" Style="{StaticResource LabelSubtitleStyle}" FontSize="15" />
+         
+            <Frame Style="{StaticResource CardStyle}">
+                <Label Text="{Binding ServicioActual.Recomendaciones, StringFormat='Recomendaciones: {0}'}" 
+                       Style="{StaticResource LabelSubtitleStyle}" 
+                       FontSize="14" 
+                       LineBreakMode="WordWrap" />
             </Frame>
 
-            <Button Text="Agendar Cita" 
+          
+            <Button Text="Agendar Cita"
                     Style="{StaticResource PrimaryButtonStyle}"
                     Command="{Binding OpenApartarCitaCommand}"
-                    HorizontalOptions="Center" />
+                    HorizontalOptions="FillAndExpand"
+                    Margin="0,10"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

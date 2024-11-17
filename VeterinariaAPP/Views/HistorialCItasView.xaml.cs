@@ -2,21 +2,23 @@ using VeterinariaAPP.ViewModels;
 
 namespace VeterinariaAPP.Views;
 
-public partial class MascotaDetails : ContentPage
+public partial class HistorialCItasView : ContentPage
 {
-	public MascotaDetails(UserViewModel viewModel)
+	public HistorialCItasView(UserViewModel viewModel)
 	{
 		InitializeComponent();
-		BindingContext = viewModel;
-	}
 
+		BindingContext = viewModel;
+
+	}
     protected async override void OnAppearing()
     {
         base.OnAppearing();
         var viewModel = BindingContext as UserViewModel;
         if (viewModel != null)
         {
-            await viewModel.GetMascotaCommand.ExecuteAsync(null);
+            await viewModel.GetCitasCommand.ExecuteAsync(null);
         }
+
     }
 }

@@ -2,33 +2,51 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VeterinariaAPP.Views.Perfil"
-             Title="Perfil">
+             Title="Perfil"
+             BackgroundColor="#FFFFFF">
+
+    <Shell.TitleView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <FlexLayout Grid.Column="0" AlignItems="Center" JustifyContent="SpaceBetween">
+                <Label Text="VeterinariaApp" FontSize="16" FontAttributes="Bold"/>
+
+                <Image 
+                 Source="cat.png" 
+                 HeightRequest="28"/>
+            </FlexLayout>
+        </Grid>
+    </Shell.TitleView>
     <ContentPage.Content>
         <VerticalStackLayout Padding="20" Spacing="15">
 
             <Label Text="Perfil del Usuario"
-                   FontSize="Large"
+                   FontSize="28"
                    FontAttributes="Bold"
-                   HorizontalOptions="Center" />
 
-            <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
+                   TextColor="#000000"/>
+
+            <Frame BorderColor="#000000" CornerRadius="10" Padding="10">
                 <StackLayout>
-                    <Label Text="Nombre:" FontAttributes="Bold" FontSize="Medium"/>
-                    <Label Text="{Binding NombreUser}" FontSize="Medium" TextColor="Black"/>
+                    <Label Text="Nombre:" FontAttributes="Bold" FontSize="Medium" TextColor="#000000"/>
+                    <Label Text="{Binding NombreUser}" FontSize="Medium" TextColor="#333333"/>
                 </StackLayout>
             </Frame>
 
-            <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
+            <Frame BorderColor="#000000" CornerRadius="10" Padding="10">
                 <StackLayout>
-                    <Label Text="Correo Electrónico:" FontAttributes="Bold" FontSize="Medium"/>
-                    <Label Text="{Binding EmailUser}" FontSize="Medium" TextColor="Black"/>
+                    <Label Text="Correo Electrónico:" FontAttributes="Bold" FontSize="Medium" TextColor="#000000"/>
+                    <Label Text="{Binding EmailUser}" FontSize="Medium" TextColor="#333333"/>
                 </StackLayout>
             </Frame>
 
-            <Frame BorderColor="LightGray" CornerRadius="10" Padding="10">
+            <Frame BorderColor="#000000" CornerRadius="10" Padding="10">
                 <StackLayout>
-                    <Label Text="ID de Usuario:" FontAttributes="Bold" FontSize="Medium"/>
-                    <Label Text="{Binding IdUser}" FontSize="Medium" TextColor="Black"/>
+                    <Label Text="ID de Usuario:" FontAttributes="Bold" FontSize="Medium" TextColor="#000000"/>
+                    <Label Text="{Binding IdUser}" FontSize="Medium" TextColor="#333333"/>
                 </StackLayout>
             </Frame>
 
@@ -40,7 +58,14 @@
                     HorizontalOptions="Center"
                     WidthRequest="200" />
 
-       
+            <Button Text="Ver Historial de Citas"
+                    Command="{Binding VerHistorialCommand}"
+                    BackgroundColor="#000000"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HorizontalOptions="Center"
+                    WidthRequest="200" />
+
         </VerticalStackLayout>
     </ContentPage.Content>
 </ContentPage>

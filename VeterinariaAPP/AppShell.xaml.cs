@@ -16,6 +16,7 @@ namespace VeterinariaAPP
             Routing.RegisterRoute("mascotas", typeof(MascotasView));
 
             Routing.RegisterRoute("detailsmascota", typeof(MascotaDetails));
+            Routing.RegisterRoute("citas", typeof(HistorialCItasView));
 
 
 

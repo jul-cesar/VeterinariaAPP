@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mopups.Services;
 using VeterinariaAPP.Models;
+using VeterinariaAPP.Models.Auth.Citas;
 using VeterinariaAPP.Services;
 using VeterinariaAPP.Views;
 
@@ -31,6 +32,8 @@ namespace VeterinariaAPP.ViewModels
 
         [ObservableProperty]
         private ObservableCollection<Mascota> mascotas = new();
+        [ObservableProperty]
+        private ObservableCollection<Cita> citas = new();
 
         [ObservableProperty]
         private string razaMascota;
@@ -273,5 +276,33 @@ namespace VeterinariaAPP.ViewModels
 
             await MopupService.Instance.PushAsync(provider.GetRequiredService<AgregarMascota>());
         }
+
+
+        [RelayCommand]
+        public async Task GetCitas()
+        {
+            try
+            {
+                IsLoading = true;
+                var id = await SecureStorage.GetAsync("id");
+
+                var servicioResponse = await userService.GetCitasService(id);
+
+                if (servicioResponse != null)
+                {
+                    Citas = new ObservableCollection<Cita>(servicioResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Error", $"Error trayendo el servicio: {ex.Message}", "OK");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        }
     }
+
 }

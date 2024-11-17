@@ -9,8 +9,18 @@ public partial class ServiciosView : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = viewModel;	
-		viewModel.GetServiciosCommand.Execute(null);
 	}
+
+    protected async override void OnAppearing()
+    {
+        base.OnAppearing();
+        var viewModel = BindingContext as ServicesViewModel;
+        if (viewModel != null)
+        {
+            await viewModel.GetServiciosCommand.ExecuteAsync(null);
+        }
+
+    }
 
     private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {

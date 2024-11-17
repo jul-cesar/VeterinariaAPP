@@ -99,4 +99,11 @@ public partial class MainViewModel : ObservableObject
             IsLoading = false;
         }
     }
+
+    [RelayCommand]
+
+    public async Task VerHistorial()
+    {
+        await Shell.Current.GoToAsync("citas");
+    }
 }

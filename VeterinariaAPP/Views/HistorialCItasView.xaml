@@ -1,46 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="VeterinariaAPP.Views.Notificaciones"
-             Title="Notificaciones"
-             BackgroundColor="#FFFFFF">
-    <Shell.TitleView>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="160"/>
-               
-            </Grid.ColumnDefinitions>
-            <FlexLayout Grid.Column="0" AlignItems="Center" JustifyContent="SpaceBetween">
-                <Label Text="VeterinariaApp" FontSize="16" FontAttributes="Bold"/>
-
-                <Image 
-                 Source="cat.png" 
-                 HeightRequest="28"/>
-            </FlexLayout>
-        </Grid>
-    </Shell.TitleView>
-
+             x:Class="VeterinariaAPP.Views.HistorialCItasView"
+             Title="Historial Citas">
     <ContentPage.Resources>
-        <Style x:Key="NotificationTitleStyle" TargetType="Label">
+        <Style x:Key="TitleStyle" TargetType="Label">
             <Setter Property="FontSize" Value="18" />
             <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="TextColor" Value="#000000" />
         </Style>
-        <Style x:Key="NotificationDescriptionStyle" TargetType="Label">
+        <Style x:Key="SubtitleStyle" TargetType="Label">
             <Setter Property="FontSize" Value="14" />
             <Setter Property="TextColor" Value="#555555" />
         </Style>
+        <Style x:Key="DateStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextColor" Value="#999999" />
+        </Style>
     </ContentPage.Resources>
+
     <ScrollView>
-        <VerticalStackLayout Padding="10">
-            <Label Text="Notificaciones" FontSize="28" TextColor="#000000" Margin="10" FontAttributes="Bold"/>
+        <VerticalStackLayout Padding="10" Spacing="15">
             <ActivityIndicator IsRunning="{Binding IsLoading}" 
                                IsVisible="{Binding IsLoading}" 
                                Color="#000000"
                                HorizontalOptions="Center" 
                                VerticalOptions="CenterAndExpand" />
 
-            <CollectionView ItemsSource="{Binding Notis}">
+            <CollectionView ItemsSource="{Binding Citas}" SelectionMode="None">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                 </CollectionView.ItemsLayout>
@@ -54,9 +41,17 @@
                                Padding="10" 
                                BackgroundColor="#FFFFFF">
                             <VerticalStackLayout Spacing="4">
-                                <Label Text="{Binding mensaje}" Style="{StaticResource NotificationTitleStyle}" />
-                                <Label Text="{Binding tipo}" Style="{StaticResource NotificationDescriptionStyle}" />
-                                <Label Text="{Binding fecha_envio, StringFormat='{0:dd MMM yyyy}'}" FontSize="12" TextColor="#999999" />
+                                <Label Text="{Binding id_cita}" 
+                                       Style="{StaticResource TitleStyle}" />
+
+                                <Label Text="{Binding descripcion}" 
+                                       Style="{StaticResource SubtitleStyle}" />
+
+                                <Label Text="{Binding estado, StringFormat='Estado: {0}'}" 
+                                       Style="{StaticResource SubtitleStyle}" />
+
+                                <Label Text="{Binding fecha_creacion, StringFormat='Creada el: {0:dd MMM yyyy}'}" 
+                                       Style="{StaticResource DateStyle}" />
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
@@ -64,7 +59,7 @@
 
                 <CollectionView.EmptyView>
                     <VerticalStackLayout Padding="20" HorizontalOptions="Center" VerticalOptions="Center">
-                        <Label Text="No hay notificaciones" 
+                        <Label Text="No hay citas registradas" 
                                TextColor="#999999" 
                                FontSize="16" 
                                HorizontalOptions="Center" />
