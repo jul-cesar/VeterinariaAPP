@@ -31,14 +31,12 @@
         <VerticalStackLayout Padding="10" Spacing="15">
             <Label Text="Mis mascotas" FontSize="28" TextColor="#000000" Margin="10" FontAttributes="Bold"/>
 
-            <!-- Indicador de carga -->
             <ActivityIndicator IsRunning="{Binding IsLoading}" 
                                IsVisible="{Binding IsLoading}"
                                VerticalOptions="Center" 
                                HorizontalOptions="Center"
                                Color="#000000" />
 
-            <!-- Lista de mascotas -->
             <CollectionView ItemsSource="{Binding Mascotas}"
                             SelectionChanged="CollectionView_SelectionChanged"
                             x:Name="collectionViewMascotas"
@@ -49,7 +47,6 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <!-- Tarjeta de mascota -->
                         <Border Stroke="#000000" 
                                 StrokeThickness="1" 
                                 Padding="10" 

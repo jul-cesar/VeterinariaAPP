@@ -210,7 +210,7 @@ public partial class ServicesViewModel : ObservableObject
                 descripcion = Descripcion,
                 id_disponibilidad = FechaDisponibleSeleccionada.id_disponibilidad,
                 id_mascota = MascotaSeleccionada.IdMascota,
-                id_servicio = servicioActual.IdServicio,
+                id_servicio = ServicioActual.IdServicio,
                 id_usuario = idUser,
                 metodo_pago = MetodoPagoSeleccionado,
                 monto = Monto
@@ -222,14 +222,14 @@ public partial class ServicesViewModel : ObservableObject
             if (response != null)
             {
                 Console.WriteLine("Cita apartada con éxito.");
-                await Shell.Current.GoToAsync("///servicios");
                 await MopupService.Instance.PopAsync();
-
-                await Shell.Current.DisplayAlert("Exito", "Cita apartada correctamente", "Ok");
+                await Shell.Current.GoToAsync("///servicios");
                 Descripcion = string.Empty;
                 Monto = string.Empty;
-                MascotaSeleccionada = new();
-                MetodoPagoSeleccionado = string.Empty;
+                await Shell.Current.DisplayAlert("Exito", "Cita apartada correctamente", "Ok");
+
+
+
 
 
             }
