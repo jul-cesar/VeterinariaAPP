@@ -7,7 +7,7 @@ namespace VeterinariaAPP.Models;
     public string id_notificacion { get; set; }
     public string tipo { get; set; }
     public string mensaje { get; set; }
-    public string fecha_envio { get; set; }
+    public DateTime fecha_envio { get; set; }
     public bool leido { get; set; }
 
 

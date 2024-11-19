@@ -18,7 +18,7 @@ namespace VeterinariaAPP.Services;
     public class UserService
     {
     public HttpClient Client { get; set; }
-    public readonly string UrlApi = "https://8e96-2800-e2-407f-fd96-f03f-205f-ceca-48f2.ngrok-free.app";
+    public readonly string UrlApi = "https://491c-2800-e2-407f-fd96-dcfe-98fa-4c-5609.ngrok-free.app";
 
     public UserService()
     {

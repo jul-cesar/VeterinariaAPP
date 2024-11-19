@@ -143,12 +143,21 @@ namespace VeterinariaAPP.ViewModels
 
         public async Task NavigateToRegister()
         {
+            ErrorMessage = string.Empty;
+            PasswordEntry = string.Empty;
+            EmailEntry = string.Empty;
+            NombreEntry = string.Empty;
             await Shell.Current.GoToAsync("//register");
         }
         [RelayCommand]
 
         public async Task NavigateToLogin()
         {
+            ErrorMessage = string.Empty;
+            PasswordEntry = string.Empty;
+            EmailEntry = string.Empty;
+            NombreEntry = string.Empty;
+
             await Shell.Current.GoToAsync("//login");
         }
     }

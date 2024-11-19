@@ -49,14 +49,14 @@
         <VerticalStackLayout Spacing="20" VerticalOptions="CenterAndExpand">
 
             <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
-                <Label Text="Create Account"
+                <Label Text="Create una cuenta"
                        Style="{StaticResource LabelTitleStyle}"/>
-                <Label Text="Please fill in the form to continue"
+                <Label Text="Llena el formulario y registrate."
                        Style="{StaticResource LabelSubtitleStyle}"/>
             </VerticalStackLayout>
 
             <Frame Style="{StaticResource InputFrameStyle}">
-                <Entry Placeholder="Full Name"
+                <Entry Placeholder="Nombre"
                        Text="{Binding NombreEntry}"
                        TextColor="#000000"
                        PlaceholderColor="#757575"
